@@ -1,173 +1,129 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-<header>
-
-<nav>
-
-<div class="logo">
-
-<img src="assets/img/logo.png" alt="TechnikCafé Logo">
-
-<span>TechnikCafé</span>
-
-</div>
-
-<ul>
-
-<li><a href="#">Start</a></li>
-
-<li><a href="#">Leistungen</a></li>
-
-<li><a href="#">Preise</a></li>
-
-<li><a href="#">Kontakt</a></li>
-
-</ul>
-
-</nav>
-
-<section class="hero">
-
-<h1>Technik verdient eine zweite Chance.</h1>
-
-<p>
-
-Reparatur von Smartphones, PCs und Laptops.
-Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.
-
-</p>
-
-<a href="#" class="button">
-
-Termin vereinbaren
-
-</a>
-
-</section>
-
-</header>
-
-<section class="leistungen">
-
-<h2>Unsere Leistungen</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>📱 Smartphones</h3>
-
-<p>Display, Akku, Software und Einrichtung.</p>
-
-</div>
-
-<div class="card">
-
-<h3>💻 PC & Laptop</h3>
-
-<p>SSD, RAM, Windows und Reparaturen.</p>
-
-</div>
-
-<div class="card">
-
-<h3>🏠 Smart Home</h3>
-
-<p>Home Assistant, WLAN und Netzwerke.</p>
-
-</div>
-
-<div class="card">
-
-<h3>💾 Daten</h3>
-
-<p>Datenrettung und Datensicherung.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="ablauf">
-
-<h2>So funktioniert's</h2>
-
-<div class="timeline">
-
-<div>1️⃣ Kontakt</div>
-
-<div>2️⃣ Termin</div>
-
-<div>3️⃣ Diagnose</div>
-
-<div>4️⃣ Reparatur</div>
-
-<div>5️⃣ Test</div>
-
-<div>6️⃣ Abholung</div>
-
-</div>
-
-</section>
-
-<section class="warum">
-
-<h2>Warum TechnikCafé?</h2>
-
-<ul>
-
-<li>✅ Ehrliche Beratung</li>
-
-<li>✅ Faire Preise</li>
-
-<li>✅ Transparente Reparaturen</li>
-
-<li>✅ Nachhaltigkeit statt Wegwerfen</li>
-
-</ul>
-
-</section>
-
-<section class="kontakt">
-
-<h2>Kontakt</h2>
-
-<p>
-
-WhatsApp<br>
-
-E-Mail<br>
-
-Termin nach Vereinbarung
-
-</p>
-
-</section>
-
-<footer>
-
-<p>
-
-© 2026 TechnikCafé
-
-</p>
-
-</footer>
+    <div class="bg-animation"></div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/img/logo.png" alt="TechnikCafé Logo" onerror="this.style.display='none'">
+                <span>Technik<span class="accent">Café</span></span>
+            </div>
+            
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <ul>
+                <li><a href="#start">Start</a></li>
+                <li><a href="#leistungen">Leistungen</a></li>
+                <li><a href="#preise">Preise</a></li>
+                <li><a href="#ablauf">Ablauf</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+
+        <section id="start" class="hero">
+            <h1>Technik verdient eine <span class="glow-text">zweite Chance.</span></h1>
+            <p>
+                Reparatur von Smartphones, PCs und Laptops. Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.
+            </p>
+            <a href="#kontakt" class="button glow-btn">Termin vereinbaren</a>
+        </section>
+    </header>
+
+    <main>
+        <section id="leistungen" class="leistungen">
+            <h2>Unsere Leistungen</h2>
+            <div class="cards">
+                <div class="card glass">
+                    <h3>📱 Smartphones</h3>
+                    <p>Display, Akku, Software und Einrichtung.</p>
+                </div>
+                <div class="card glass">
+                    <h3>💻 PC & Laptop</h3>
+                    <p>SSD, RAM, Windows und Reparaturen.</p>
+                </div>
+                <div class="card glass">
+                    <h3>🏠 Smart Home</h3>
+                    <p>Home Assistant, WLAN und Netzwerke.</p>
+                </div>
+                <div class="card glass">
+                    <h3>💾 Daten</h3>
+                    <p>Datenrettung und Datensicherung.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="preise" class="preise">
+            <h2>Faire Preise</h2>
+            <div class="cards">
+                <div class="card glass price-card">
+                    <h3>Diagnose</h3>
+                    <div class="price">ab 0 €</div>
+                    <p>Ehrliche Fehleranalyse & Kostenvoranschlag. Du entscheidest!</p>
+                </div>
+                <div class="card glass price-card featured">
+                    <h3>Express Reparatur</h3>
+                    <div class="price">Faire Tarife</div>
+                    <p>Smartphones, Notebooks & PCs schnell wieder fit gemacht.</p>
+                </div>
+                <div class="card glass price-card">
+                    <h3>Beratung / Setup</h3>
+                    <div class="price">Nach Aufwand</div>
+                    <p>Smart Home Einrichtung, Windows-Installationen & Datenrettung.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ablauf" class="ablauf">
+            <h2>So funktioniert's</h2>
+            <div class="timeline">
+                <div class="glass">1️⃣ Kontakt</div>
+                <div class="glass">2️⃣ Termin</div>
+                <div class="glass">3️⃣ Diagnose</div>
+                <div class="glass">4️⃣ Reparatur</div>
+                <div class="glass">5️⃣ Test</div>
+                <div class="glass">6️⃣ Abholung</div>
+            </div>
+        </section>
+
+        <section class="warum">
+            <h2>Warum TechnikCafé?</h2>
+            <ul class="warum-list">
+                <li class="glass">✅ Ehrliche Beratung ohne Fachchinesisch</li>
+                <li class="glass">✅ Faire & transparente Preise vorab</li>
+                <li class="glass">✅ Nachhaltigkeit statt Wegwerfen</li>
+            </ul>
+        </section>
+
+        <section id="kontakt" class="kontakt">
+            <h2>Kontakt</h2>
+            <p>Melde dich unkompliziert bei uns. Termin nach Vereinbarung.</p>
+            <div class="kontakt-buttons">
+                <a href="mailto:deine-email@beispiel.de" class="button glass"><i class="fas fa-envelope"></i> E-Mail schreiben</a>
+            </div>
+        </section>
+    </main>
+
+    <a href="https://wa.me/DEINE_NUMMER" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <p>&copy; 2026 TechnikCafé Wernigerode</p>
+    </footer>
 
 </body>
-
 </html>
