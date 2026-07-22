@@ -1,225 +1,277 @@
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
+/* --- 🎨 VARIABLEN & BASICS --- */
+:root {
+    --bg-color: #0b0f19;
+    --surface-glass: rgba(17, 24, 39, 0.6);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --accent: #48d597;
+    --accent-glow: rgba(72, 213, 151, 0.4);
+    --text-main: #f3f4f6;
 }
 
-body{
-
-background:#111827;
-
-color:white;
-
-font-family:Arial,Helvetica,sans-serif;
-
-line-height:1.6;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Sanftes Scrollen bei Klick auf Menü */
 }
 
-nav{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:20px 60px;
-
-background:#0f172a;
-
-position:sticky;
-
-top:0;
-
+body {
+    background: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-.logo{
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-font-size:24px;
-
-font-weight:bold;
-
+/* --- 🌌 ANIMIERTER HINTERGRUND --- */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 15% 20%, rgba(72, 213, 151, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(30, 41, 59, 0.5) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
 }
 
-.logo img{
-
-height:50px;
-
+/* --- 💎 GLASSMORPHISM STYLE --- */
+.glass {
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
 }
 
-nav ul{
+.accent { color: var(--accent); }
 
-display:flex;
-
-gap:30px;
-
-list-style:none;
-
+/* --- 🧭 NAVIGATION & HAMBURGER --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-glass);
 }
 
-nav a{
-
-color:white;
-
-text-decoration:none;
-
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
 }
 
-.hero{
+.logo img { height: 40px; }
 
-text-align:center;
-
-padding:120px 20px;
-
+nav ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
 }
 
-.hero h1{
-
-font-size:58px;
-
-color:#48d597;
-
-margin-bottom:20px;
-
+nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
-.hero p{
+nav a:hover { color: var(--accent); }
 
-font-size:22px;
+/* Hamburger Menu Logik via CSS toggling */
+.menu-toggle { display: none; }
+.menu-hamburger { display: none; cursor: pointer; }
 
-max-width:800px;
-
-margin:auto;
-
-margin-bottom:40px;
-
+/* --- 🚀 HERO SECTION --- */
+.hero {
+    text-align: center;
+    padding: 100px 20px 80px 20px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.button{
-
-display:inline-block;
-
-background:#48d597;
-
-padding:18px 35px;
-
-border-radius:12px;
-
-text-decoration:none;
-
-font-weight:bold;
-
-color:#111827;
-
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
 }
 
-section{
-
-padding:80px 10%;
-
+.glow-text {
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--accent-glow);
 }
 
-h2{
-
-font-size:38px;
-
-margin-bottom:40px;
-
-text-align:center;
-
+.hero p {
+    font-size: 1.2rem;
+    color: #9ca3af;
+    margin-bottom: 40px;
 }
 
-.cards{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:25px;
-
+/* --- 🟢 BUTTONS & GLOW --- */
+.button {
+    display: inline-block;
+    background: var(--accent);
+    padding: 14px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #0b0f19;
+    transition: all 0.3s ease;
 }
 
-.card{
-
-background:#1f2937;
-
-padding:30px;
-
-border-radius:20px;
-
-transition:.3s;
-
+.glow-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--accent);
 }
 
-.card:hover{
+/* --- 📦 SEKTIONEN & CARDS --- */
+section { padding: 60px 5%; }
 
-transform:translateY(-8px);
-
-box-shadow:0 0 20px rgba(72,213,151,.4);
-
+h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 700;
 }
 
-.timeline{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-
-gap:20px;
-
-text-align:center;
-
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
 }
 
-.timeline div{
-
-background:#1f2937;
-
-padding:20px;
-
-border-radius:15px;
-
+.card {
+    padding: 30px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.warum ul{
-
-max-width:700px;
-
-margin:auto;
-
-font-size:20px;
-
-list-style:none;
-
-display:grid;
-
-gap:15px;
-
+.card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
 }
 
-.kontakt{
-
-text-align:center;
-
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(72, 213, 151, 0.15);
 }
 
-footer{
+/* Preise spezifisch */
+.price-card { text-align: center; }
+.price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 15px 0;
+}
+.featured { border: 1px solid var(--accent); }
 
-padding:40px;
+/* Ablauf (Timeline) */
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+.timeline div {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+}
 
-text-align:center;
+/* Warum Liste */
+.warum-list {
+    list-style: none;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.warum-list li { padding: 15px 20px; }
 
-background:#0f172a;
+/* Kontakt & Footer */
+.kontakt { text-align: center; }
+.kontakt p { margin-bottom: 25px; font-size: 1.1rem; }
+footer {
+    padding: 30px;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.9);
+    border-top: 1px solid var(--border-glass);
+}
 
-margin-top:80px;
+/* 🟢 FLOATING WHATSAPP BUTTON */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 200;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
 
+/* --- 📱 RESPONSIVE DESIGN (MEDIA QUERIES) --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    
+    /* Hamburger Menu Sichtbarkeit & Logik */
+    .menu-hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 101;
+    }
+    .menu-hamburger span {
+        display: block;
+        width: 28px;
+        height: 3px;
+        background: var(--text-main);
+        transition: 0.3s;
+        border-radius: 2px;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    /* Wenn Checkbox aktiv ist, Menü reinschieben */
+    .menu-toggle:checked ~ ul { right: 0; }
+    
+    /* Hamburger zu "X" umwandeln bei Klick */
+    .menu-toggle:checked ~ .menu-hamburger span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .menu-toggle:checked ~ .menu-hamburger span:nth-child(2) { opacity: 0; }
+    .menu-toggle:checked ~ .menu-hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 }
