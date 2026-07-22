@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth; /* Sanftes Scrollen bei Klick auf Menü */
+    scroll-behavior: smooth; /* Sanftes Scrollen bei Klick aufs Menü */
 }
 
 body {
@@ -64,13 +64,18 @@ nav {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-size: 22px;
     font-weight: 800;
     letter-spacing: 0.5px;
 }
 
-.logo img { height: 40px; }
+/* Zähmt dein großes Logo, damit es perfekt in die Bar passt */
+.logo img { 
+    height: 45px; 
+    width: auto;
+    object-fit: contain;
+}
 
 nav ul {
     display: flex;
@@ -87,20 +92,20 @@ nav a {
 
 nav a:hover { color: var(--accent); }
 
-/* Hamburger Menu Logik via CSS toggling */
+/* Hamburger-Menü Logik via reinem CSS */
 .menu-toggle { display: none; }
 .menu-hamburger { display: none; cursor: pointer; }
 
 /* --- 🚀 HERO SECTION --- */
 .hero {
     text-align: center;
-    padding: 100px 20px 80px 20px;
+    padding: 120px 20px 80px 20px;
     max-width: 900px;
     margin: 0 auto;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -112,7 +117,7 @@ nav a:hover { color: var(--accent); }
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: #9ca3af;
     margin-bottom: 40px;
 }
@@ -135,11 +140,11 @@ nav a:hover { color: var(--accent); }
 }
 
 /* --- 📦 SEKTIONEN & CARDS --- */
-section { padding: 60px 5%; }
+section { padding: 80px 5%; }
 
 h2 {
-    font-size: 2.2rem;
-    margin-bottom: 40px;
+    font-size: 2.4rem;
+    margin-bottom: 45px;
     text-align: center;
     font-weight: 700;
 }
@@ -169,7 +174,7 @@ h2 {
 /* Preise spezifisch */
 .price-card { text-align: center; }
 .price {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
     color: var(--accent);
     margin: 15px 0;
@@ -183,7 +188,7 @@ h2 {
     gap: 15px;
 }
 .timeline div {
-    padding: 15px;
+    padding: 18px;
     text-align: center;
     font-weight: 600;
 }
@@ -191,17 +196,39 @@ h2 {
 /* Warum Liste */
 .warum-list {
     list-style: none;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-.warum-list li { padding: 15px 20px; }
+.warum-list li { padding: 18px 25px; font-size: 1.1rem; }
 
 /* Kontakt & Footer */
 .kontakt { text-align: center; }
-.kontakt p { margin-bottom: 25px; font-size: 1.1rem; }
+.kontakt p { margin-bottom: 25px; font-size: 1.2rem; }
+
+.kontakt-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.kontakt-buttons .button {
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.kontakt-buttons .whatsapp-btn:hover {
+    border-color: #25d366;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+    color: #25d366;
+}
+
 footer {
     padding: 30px;
     text-align: center;
@@ -218,8 +245,8 @@ footer {
     color: #fff;
     border-radius: 50px;
     text-align: center;
-    font-size: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-size: 32px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     z-index: 200;
     width: 60px;
     height: 60px;
@@ -234,9 +261,10 @@ footer {
 /* --- 📱 RESPONSIVE DESIGN (MEDIA QUERIES) --- */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.2rem; }
-    .hero p { font-size: 1rem; }
+    .hero p { font-size: 1.1rem; }
+    section { padding: 60px 5%; }
     
-    /* Hamburger Menu Sichtbarkeit & Logik */
+    /* Hamburger-Icon sichtbar machen */
     .menu-hamburger {
         display: flex;
         flex-direction: column;
@@ -252,25 +280,26 @@ footer {
         border-radius: 2px;
     }
 
+    /* Menü auf Handys verstecken und stylen */
     nav ul {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
+        width: 75%;
         height: 100vh;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(15px);
+        background: rgba(11, 15, 25, 0.96);
+        backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: 0.4s ease-in-out;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.6);
     }
 
-    /* Wenn Checkbox aktiv ist, Menü reinschieben */
+    /* Menü reinschieben, wenn die Checkbox aktiv ist */
     .menu-toggle:checked ~ ul { right: 0; }
     
-    /* Hamburger zu "X" umwandeln bei Klick */
+    /* Hamburger-Icon zu einem "X" transformieren */
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(2) { opacity: 0; }
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
