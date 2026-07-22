@@ -12,15 +12,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth; /* Sanftes Scrollen bei Klick aufs Menü */
+    scroll-behavior: smooth;
 }
 
-body {
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* 🛠️ WICHTIG: Verhindert das seitliche Scrollen komplett! */
     background: var(--bg-color);
     color: var(--text-main);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 /* --- 🌌 ANIMIERTER HINTERGRUND --- */
@@ -30,10 +32,16 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at 15% 20%, rgba(72, 213, 151, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 85% 70%, rgba(30, 41, 59, 0.5) 0%, transparent 50%);
+    background: radial-gradient(circle at 15% 20%, rgba(72, 213, 151, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 85% 70%, rgba(30, 41, 59, 0.6) 0%, transparent 55%);
     z-index: -1;
     pointer-events: none;
+    animation: pulseGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.05); opacity: 1; }
 }
 
 /* --- 💎 GLASSMORPHISM STYLE --- */
@@ -55,6 +63,7 @@ nav {
     padding: 15px 5%;
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -70,7 +79,6 @@ nav {
     letter-spacing: 0.5px;
 }
 
-/* Zähmt dein großes Logo, damit es perfekt in die Bar passt */
 .logo img { 
     height: 45px; 
     width: auto;
@@ -92,7 +100,6 @@ nav a {
 
 nav a:hover { color: var(--accent); }
 
-/* Hamburger-Menü Logik via reinem CSS */
 .menu-toggle { display: none; }
 .menu-hamburger { display: none; cursor: pointer; }
 
@@ -171,7 +178,7 @@ h2 {
     box-shadow: 0 10px 30px rgba(72, 213, 151, 0.15);
 }
 
-/* Preise spezifisch */
+/* Preise */
 .price-card { text-align: center; }
 .price {
     font-size: 2rem;
@@ -181,7 +188,7 @@ h2 {
 }
 .featured { border: 1px solid var(--accent); }
 
-/* Ablauf (Timeline) */
+/* Ablauf */
 .timeline {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -193,7 +200,7 @@ h2 {
     font-weight: 600;
 }
 
-/* Warum Liste */
+/* Warum */
 .warum-list {
     list-style: none;
     max-width: 650px;
@@ -236,20 +243,20 @@ footer {
     border-top: 1px solid var(--border-glass);
 }
 
-/* 🟢 FLOATING WHATSAPP BUTTON */
+/* 🟢 FLOATING WHATSAPP BUTTON (🛠️ Korrigiert für Mobilgeräte) */
 .whatsapp-float {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 20px;
+    right: 20px; /* 🛠️ Sicherer Abstand zum Rand */
     background-color: #25d366;
     color: #fff;
-    border-radius: 50px;
+    border-radius: 50%;
     text-align: center;
-    font-size: 32px;
+    font-size: 28px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    z-index: 200;
-    width: 60px;
-    height: 60px;
+    z-index: 99; /* Leicht unter dem mobilen Menü z-index */
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,47 +267,53 @@ footer {
 
 /* --- 📱 RESPONSIVE DESIGN (MEDIA QUERIES) --- */
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2.2rem; }
-    .hero p { font-size: 1.1rem; }
-    section { padding: 60px 5%; }
+    .hero h1 { font-size: 2.0rem; }
+    .hero p { font-size: 1.05rem; }
+    section { padding: 50px 5%; }
     
     /* Hamburger-Icon sichtbar machen */
     .menu-hamburger {
         display: flex;
         flex-direction: column;
         gap: 5px;
-        z-index: 101;
+        z-index: 105;
     }
     .menu-hamburger span {
         display: block;
-        width: 28px;
+        width: 26px;
         height: 3px;
         background: var(--text-main);
         transition: 0.3s;
         border-radius: 2px;
     }
 
-    /* Menü auf Handys verstecken und stylen */
+    /* 🛠️ Korrigiertes Smartphone-Menü */
     nav ul {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 75%;
+        right: -100%; /* Befindet sich komplett außerhalb des Bildschirms */
+        width: 80%;
         height: 100vh;
-        background: rgba(11, 15, 25, 0.96);
+        background: rgba(11, 15, 25, 0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: 0.4s ease-in-out;
+        gap: 35px;
+        transition: transform 0.4s ease-in-out, right 0s 0.4s; /* 🛠️ Verhindert Blitzen beim Laden */
         box-shadow: -10px 0 30px rgba(0,0,0,0.6);
+        z-index: 104;
     }
 
-    /* Menü reinschieben, wenn die Checkbox aktiv ist */
-    .menu-toggle:checked ~ ul { right: 0; }
+    /* Menü reinschieben, wenn Checkbox aktiv ist */
+    .menu-toggle:checked ~ ul {
+        right: 0;
+        transition: transform 0.4s ease-in-out;
+    }
     
-    /* Hamburger-Icon zu einem "X" transformieren */
-    .menu-toggle:checked ~ .menu-hamburger span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    /* Hamburger zu X */
+    .menu-toggle:checked ~ .menu-hamburger span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(2) { opacity: 0; }
-    .menu-toggle:checked ~ .menu-hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .menu-toggle:checked ~ .menu-hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 }
