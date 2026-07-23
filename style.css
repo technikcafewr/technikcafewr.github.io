@@ -1,4 +1,4 @@
-/* --- 🎨 VARIABLEN & BASICS (Standard: Dark Mode) --- */
+/* --- 🎨 SYSTEM-VARIABLEN (Standard: Dark Mode) --- */
 :root {
     --bg-color: #0b0f19;
     --surface-glass: rgba(17, 24, 39, 0.6);
@@ -10,16 +10,16 @@
     --nav-bg: rgba(15, 23, 42, 0.8);
 }
 
-/* 🌓 LIGHT MODE FARB-ANPASSUNGEN */
+/* 🌓 ERZWUNGENER LIGHT MODE ÜBER DIE CSS-KLASSE */
 body.light-mode {
-    --bg-color: #f0f4f8;
-    --surface-glass: rgba(255, 255, 255, 0.7);
-    --border-glass: rgba(15, 23, 42, 0.08);
-    --accent: #10b981; /* Etwas kräftigeres Grün für besseren Kontrast auf Weiß */
-    --accent-glow: rgba(16, 185, 129, 0.2);
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --nav-bg: rgba(236, 242, 248, 0.8);
+    --bg-color: #f0f4f8 !important;
+    --surface-glass: rgba(255, 255, 255, 0.75) !important;
+    --border-glass: rgba(15, 23, 42, 0.08) !important;
+    --accent: #10b981 !important;
+    --accent-glow: rgba(16, 185, 129, 0.2) !important;
+    --text-main: #0f172a !important;
+    --text-muted: #475569 !important;
+    --nav-bg: rgba(226, 232, 240, 0.85) !important;
 }
 
 * {
@@ -36,59 +36,42 @@ html, body {
     background: var(--bg-color);
     color: var(--text-main);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- 🌌 ANIMIERTER HINTERGRUND --- */
 .bg-animation {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at 15% 20%, rgba(72, 213, 151, 0.06) 0%, transparent 45%),
-                radial-gradient(circle at 85% 70%, rgba(30, 41, 59, 0.6) 0%, transparent 55%);
+    background: radial-gradient(circle at 15% 20%, rgba(72, 213, 151, 0.06) 0%, transparent 45%);
     z-index: -1;
     pointer-events: none;
-    animation: pulseGlow 10s ease-in-out infinite alternate;
-}
-body.light-mode .bg-animation {
-    background: radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 45%),
-                radial-gradient(circle at 85% 70%, rgba(203, 213, 225, 0.4) 0%, transparent 55%);
 }
 
-@keyframes pulseGlow {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(1.05); opacity: 1; }
-}
-
-/* --- 💎 GLASSMORPHISM STYLE --- */
+/* 💎 GLASSMORPHISMUS OPTIK */
 .glass {
     background: var(--surface-glass);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-glass);
     border-radius: 16px;
-    transition: background 0.3s, border 0.3s, box-shadow 0.3s;
 }
 
 .accent { color: var(--accent); }
 
-/* --- 🧭 NAVIGATION & HAMBURGER --- */
+/* 🧭 NAVIGATION */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
     background: var(--nav-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--border-glass);
-    transition: background 0.3s, border 0.3s;
 }
 
 .logo {
@@ -97,14 +80,9 @@ nav {
     gap: 12px;
     font-size: 22px;
     font-weight: 800;
-    letter-spacing: 0.5px;
 }
 
-.logo img { 
-    height: 45px; 
-    width: auto;
-    object-fit: contain;
-}
+.logo img { height: 45px; }
 
 nav ul {
     display: flex;
@@ -117,59 +95,25 @@ nav a {
     color: var(--text-main);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
 }
 
-nav a:hover { color: var(--accent); }
-
-/* Stylischer Modus-Button */
 .theme-btn {
     background: transparent;
     border: none;
     color: var(--text-main);
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 5px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.3s, transform 0.2s;
-}
-.theme-btn:hover {
-    color: var(--accent);
-    transform: scale(1.1);
 }
 
-.menu-toggle { display: none; }
-.menu-hamburger { display: none; cursor: pointer; }
+.menu-toggle, .menu-hamburger { display: none; }
 
-/* --- 🚀 HERO SECTION --- */
-.hero {
-    text-align: center;
-    padding: 120px 20px 80px 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
+/* 🚀 HERO */
+.hero { text-align: center; padding: 120px 20px 80px 20px; max-width: 900px; margin: 0 auto; }
+.hero h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; }
+.glow-text { color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+.hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; }
 
-.hero h1 {
-    font-size: 3.2rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.glow-text {
-    color: var(--accent);
-    text-shadow: 0 0 20px var(--accent-glow);
-}
-
-.hero p {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-}
-
-/* --- 🟢 BUTTONS & GLOW --- */
 .button {
     display: inline-block;
     background: var(--accent);
@@ -178,97 +122,30 @@ nav a:hover { color: var(--accent); }
     text-decoration: none;
     font-weight: bold;
     color: #0b0f19;
-    transition: all 0.3s ease;
 }
 body.light-mode .button { color: #fff; }
 
-.glow-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px var(--accent);
-}
-
-/* --- 📊 COUNTER (STATS) STYLING --- */
+/* 📊 STATS / COUNTER */
 .stats { padding: 20px 5% 60px 5%; }
-.stats-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .stat-card { text-align: center; padding: 25px; }
+.stat-wrapper { font-size: 3rem; font-weight: 800; color: var(--accent); }
 
-.stat-wrapper {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--accent);
-    text-shadow: 0 0 15px var(--accent-glow);
-    margin-bottom: 5px;
-    line-height: 1;
-}
-
-.stat-card p {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-/* --- 📦 SEKTIONEN & CARDS --- */
+/* 📦 CARDS SYSTEM */
 section { padding: 80px 5%; }
-
-h2 {
-    font-size: 2.4rem;
-    margin-bottom: 45px;
-    text-align: center;
-    font-weight: 700;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.card {
-    padding: 30px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card h3 { font-size: 1.4rem; margin-bottom: 15px; }
-
-.card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(72, 213, 151, 0.15);
-}
-body.light-mode .card:hover {
-    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
-}
-
-/* Preise */
-.price-card { text-align: center; }
-.price {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--accent);
-    margin: 15px 0;
-}
+h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.card { padding: 30px; }
+.price { font-size: 2rem; font-weight: bold; color: var(--accent); margin: 15px 0; }
 .featured { border: 1px solid var(--accent); }
 
-/* Ablauf */
-.timeline {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-}
+.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
 .timeline div { padding: 18px; text-align: center; font-weight: 600; }
 
-/* Warum */
-.warum-list {
-    list-style: none;
-    max-width: 650px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.warum-list li { padding: 18px 25px; font-size: 1.1rem; }
+.warum-list { list-style: none; max-width: 650px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+.warum-list li { padding: 18px 25px; }
 
-/* --- 🙋‍♂️ FAQ AKKORDEON STYLING --- */
+/* 🙋‍♂️ SAUBERES FAQ ACCORDION DESIGN */
 .faq-container {
     max-width: 750px;
     margin: 0 auto;
@@ -283,35 +160,25 @@ body.light-mode .card:hover {
 }
 
 .faq-question {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
     padding: 20px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: left;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-main);
     cursor: pointer;
-    transition: color 0.2s;
+    font-size: 1.1rem;
+    font-weight: 600;
+    user-select: none;
 }
-
-.faq-question:hover { color: var(--accent); }
 
 .faq-question i {
-    font-size: 1rem;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: var(--accent);
+    transition: transform 0.3s ease;
 }
 
-/* Aufklappbarer Inhaltsbereich */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+    transition: max-height 0.3s ease, padding 0.3s ease;
     padding: 0 25px;
 }
 
@@ -319,49 +186,26 @@ body.light-mode .card:hover {
     color: var(--text-muted);
     padding-bottom: 20px;
     font-size: 1rem;
-    line-height: 1.6;
 }
 
-/* Aktiver Zustand des Akkordeons */
+/* Aktivierungs-Zustände */
 .faq-item.active .faq-answer {
-    max-height: 200px; /* Groß genug für den Text */
+    max-height: 300px;
 }
 
 .faq-item.active .faq-question i {
     transform: rotate(180deg);
 }
 
-/* Kontakt & Footer */
+/* FOOTER & BUTTONS */
 .kontakt { text-align: center; }
-.kontakt p { margin-bottom: 25px; font-size: 1.2rem; }
-
-.kontakt-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
+.kontakt-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 25px; }
 .kontakt-buttons .button { color: var(--text-main); display: flex; align-items: center; gap: 10px; }
-body.light-mode .kontakt-buttons .button { color: var(--text-main); }
-body.light-mode .kontakt-buttons .button:first-child { color: #fff; } /* E-Mail Button-Ausnahme */
+body.light-mode .kontakt-buttons .button:first-child { color: #fff; }
 
-.kontakt-buttons .whatsapp-btn:hover {
-    border-color: #25d366;
-    box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
-    color: #25d366;
-}
-
-footer {
-    padding: 30px;
-    text-align: center;
-    background: rgba(15, 23, 42, 0.9);
-    border-top: 1px solid var(--border-glass);
-}
+footer { padding: 30px; text-align: center; background: rgba(15, 23, 42, 0.9); border-top: 1px solid var(--border-glass); }
 body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
 
-/* 🟢 FLOATING WHATSAPP BUTTON */
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
@@ -369,36 +213,23 @@ body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
     background-color: #25d366;
     color: #fff;
     border-radius: 50%;
-    text-align: center;
-    font-size: 28px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    z-index: 99;
     width: 55px;
     height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 28px;
+    z-index: 99;
     text-decoration: none;
-    transition: transform 0.3s;
 }
-.whatsapp-float:hover { transform: scale(1.1); }
 
-/* --- 📱 RESPONSIVE DESIGN --- */
+/* 📱 RESPONSIVE */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.0rem; }
-    .hero p { font-size: 1.05rem; }
     section { padding: 50px 5%; }
+    .menu-hamburger { display: flex; flex-direction: column; gap: 5px; }
+    .menu-hamburger span { display: block; width: 26px; height: 3px; background: var(--text-main); }
     
-    .menu-hamburger { display: flex; flex-direction: column; gap: 5px; z-index: 105; }
-    .menu-hamburger span {
-        display: block;
-        width: 26px;
-        height: 3px;
-        background: var(--text-main);
-        transition: 0.3s;
-        border-radius: 2px;
-    }
-
     nav ul {
         position: fixed;
         top: 0;
@@ -410,16 +241,7 @@ body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
         justify-content: center;
         align-items: center;
         gap: 35px;
-        transition: transform 0.4s ease-in-out, right 0s 0.4s;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.6);
-        z-index: 104;
+        transition: right 0.4s ease-in-out;
     }
-
-    .menu-toggle:checked ~ ul { right: 0; transition: transform 0.4s ease-in-out; }
-    
-    .menu-toggle:checked ~ .menu-hamburger span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-    .menu-toggle:checked ~ .menu-hamburger span:nth-child(2) { opacity: 0; }
-    .menu-toggle:checked ~ .menu-hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-    
-    .faq-question { font-size: 1.05rem; padding: 15px 20px; }
+    .menu-toggle:checked ~ ul { right: 0; }
 }
