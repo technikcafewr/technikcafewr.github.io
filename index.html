@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -43,9 +43,7 @@
 
         <section id="start" class="hero">
             <h1>Technik verdient eine <span class="glow-text">zweite Chance.</span></h1>
-            <p>
-                Reparatur von Smartphones, PCs und Laptops. Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.
-            </p>
+            <p>Reparatur von Smartphones, PCs und Laptops. Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.</p>
             <a href="#kontakt" class="button glow-btn">Termin vereinbaren</a>
         </section>
     </header>
@@ -54,21 +52,15 @@
         <section id="stats" class="stats">
             <div class="cards stats-grid">
                 <div class="card glass stat-card">
-                    <div class="stat-wrapper">
-                        <span class="stat-number" data-target="450">0</span><span class="stat-suffix">+</span>
-                    </div>
+                    <div class="stat-wrapper"><span class="stat-number" data-target="450">0</span><span class="stat-suffix">+</span></div>
                     <p>📱 Smartphones gerettet</p>
                 </div>
                 <div class="card glass stat-card">
-                    <div class="stat-wrapper">
-                        <span class="stat-number" data-target="320">0</span><span class="stat-suffix">+</span>
-                    </div>
+                    <div class="stat-wrapper"><span class="stat-number" data-target="320">0</span><span class="stat-suffix">+</span></div>
                     <p>💻 PCs & Laptops optimiert</p>
                 </div>
                 <div class="card glass stat-card">
-                    <div class="stat-wrapper">
-                        <span class="stat-number" data-target="99">0</span><span class="stat-suffix">%</span>
-                    </div>
+                    <div class="stat-wrapper"><span class="stat-number" data-target="99">0</span><span class="stat-suffix">%</span></div>
                     <p>🌱 Zufriedene Kunden</p>
                 </div>
             </div>
@@ -142,32 +134,32 @@
             <h2>Häufige Fragen</h2>
             <div class="faq-container">
                 <div class="faq-item glass">
-                    <button class="faq-question">
+                    <div class="faq-question">
                         <span>Wie lange dauert eine Reparatur im Durchschnitt?</span>
                         <i class="fas fa-chevron-down"></i>
-                    </button>
+                    </div>
                     <div class="faq-answer">
                         <p>Viele Smartphone-Reparaturen (wie Display- oder Akkuwechsel) erledigen wir innerhalb weniger Stunden. Bei aufwendigeren PC-Fehlersuchen oder Datenrettungen kann es 1-3 Werktage dauern. Wir geben dir bei der Diagnose immer eine genaue Einschätzung.</p>
                     </div>
                 </div>
 
                 <div class="faq-item glass">
-                    <button class="faq-question">
+                    <div class="faq-question">
                         <span>Was passiert mit meinen privaten Daten?</span>
                         <i class="fas fa-chevron-down"></i>
-                    </button>
+                    </div>
                     <div class="faq-answer">
                         <p>Deine Daten sind bei uns absolut sicher. Datenschutz hat höchste Priorität. Sofern es für die Reparatur nicht zwingend notwendig ist, verlangen wir keine Sperrcodes. Vor größeren Eingriffen versuchen wir zudem immer, deine Daten redundant zu sichern.</p>
                     </div>
                 </div>
 
                 <div class="faq-item glass">
-                    <button class="faq-question">
+                    <div class="faq-question">
                         <span>Muss ich vorab einen Termin vereinbaren?</span>
                         <i class="fas fa-chevron-down"></i>
-                    </button>
+                    </div>
                     <div class="faq-answer">
-                        <p>Ja, bitte halte kurz Rücksprache mit uns per WhatsApp oder E-Mail. Da wir uns für jede Beratung und Diagnose ausreichend Zeit nehmen möchten, arbeiten wir ausschließlich nach vorheriger Terminvereinbarung.</p>
+                        <p>Ja, bitte halte kurz Rücksprache mit uns per WhatsApp oder E-Mail. Da wir os für jede Beratung und Diagnose ausreichend Zeit nehmen möchten, arbeiten wir ausschließlich nach vorheriger Terminvereinbarung.</p>
                     </div>
                 </div>
             </div>
@@ -192,7 +184,7 @@
     </footer>
 
     <script>
-        // --- COUNTER LOGIK ---
+        // --- COUNTER ---
         const stats = document.querySelectorAll('.stat-number');
         const startCounter = (entries, observer) => {
             entries.forEach(entry => {
@@ -219,27 +211,23 @@
         const observer = new IntersectionObserver(startCounter, { threshold: 0.3 });
         stats.forEach(stat => observer.observe(stat));
 
-        // --- 🙋‍♂️ FAQ AKKORDEON LOGIK ---
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                
-                // Schließt andere offene FAQs (optional, sorgt für Ordnung)
+        // --- FAQ INTERAKTION ---
+        const faqHeaders = document.querySelectorAll('.faq-question');
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
                 document.querySelectorAll('.faq-item').forEach(otherItem => {
                     if (otherItem !== item) otherItem.classList.remove('active');
                 });
-
                 item.classList.toggle('active');
             });
         });
 
-        // --- 🌓 DARK/LIGHT MODE LOGIK ---
+        // --- LIGHT/DARK MODE LOGIK ---
         const themeToggle = document.getElementById('theme-toggle');
         const moonIcon = themeToggle.querySelector('.id-dark');
         const sunIcon = themeToggle.querySelector('.id-light');
 
-        // Prüfen, ob der User bereits eine Präferenz gespeichert hat
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-mode');
             moonIcon.style.display = 'none';
@@ -248,7 +236,6 @@
 
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
-            
             if (document.body.classList.contains('light-mode')) {
                 localStorage.setItem('theme', 'light');
                 moonIcon.style.display = 'none';
@@ -260,6 +247,5 @@
             }
         });
     </script>
-
 </body>
 </html>
