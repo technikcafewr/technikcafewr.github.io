@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-    <link rel="stylesheet" href="style.css?v=1.4">
+    <link rel="stylesheet" href="style.css?v=1.5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -31,6 +31,7 @@
                 <li><a href="#preise">Preise</a></li>
                 <li><a href="#ablauf">Ablauf</a></li>
                 <li><a href="#faq">FAQ</a></li>
+                <li><a href="#anfrage">Anfrage</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
                 <li><a href="#" id="login-open-btn" class="nav-login-btn"><i class="fas fa-lock"></i> Status-Check</a></li>
                 <li>
@@ -45,7 +46,7 @@
         <section id="start" class="hero">
             <h1>Technik verdient eine <span class="glow-text">zweite Chance.</span></h1>
             <p>Reparatur von Smartphones, PCs und Laptops. Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.</p>
-            <a href="#kontakt" class="button glow-btn">Termin vereinbaren</a>
+            <a href="#anfrage" class="button glow-btn">Termin vereinbaren</a>
         </section>
     </header>
 
@@ -166,9 +167,54 @@
             </div>
         </section>
 
+        <section id="anfrage" class="anfrage">
+            <h2>Reparaturanfrage stellen</h2>
+            <div class="form-container glass">
+                <form onsubmit="event.preventDefault(); alert('Vielen Dank für deine Anfrage! Wir melden uns in Kürze bei dir.'); this.reset();">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="form-name">Dein Name</label>
+                            <input type="text" id="form-name" placeholder="Max Mustermann" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="form-kontakt">E-Mail oder Telefonnummer</label>
+                            <input type="text" id="form-kontakt" placeholder="deine@email.de oder Handynummer" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="form-device">Gerätemodell</label>
+                            <input type="text" id="form-device" placeholder="z.B. iPhone 14 Pro, Lenovo ThinkPad" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="form-service">Was muss getan werden?</label>
+                            <select id="form-service" required>
+                                <option value="" disabled selected hidden>Bitte auswählen...</option>
+                                <option value="smartphone-display">📱 Smartphone Displaywechsel</option>
+                                <option value="smartphone-akku">🔋 Smartphone Akkuwechsel</option>
+                                <option value="pc-laptop">💻 PC / Laptop Reparatur & Upgrade</option>
+                                <option value="windows">💿 Windows Setup / Bereinigung</option>
+                                <option value="datenrettung">💾 Datenrettung & Sicherung</option>
+                                <option value="smarthome">🏠 Smart Home & Netzwerk Beratung</option>
+                                <option value="sonstiges">⚙️ Sonstiges / Fehler unklar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group text-group">
+                        <label for="form-message">Schadensbeschreibung / Details</label>
+                        <textarea id="form-message" rows="4" placeholder="Beschreibe kurz den Fehler (z.B. Lädt nicht mehr, Display flackert...)" required></textarea>
+                    </div>
+
+                    <button type="submit" class="button form-submit-btn">Anfrage absenden</button>
+                </form>
+            </div>
+        </section>
+
         <section id="kontakt" class="kontakt">
-            <h2>Kontakt</h2>
-            <p>Melde dich unkompliziert bei uns. Termin nach Vereinbarung.</p>
+            <h2>Direkter Kontakt</h2>
+            <p>Alternativ kannst du dich auch direkt unkompliziert bei uns melden. Termin nach Vereinbarung.</p>
             <div class="kontakt-buttons">
                 <a href="mailto:technikcafewr@gmail.com" class="button glass"><i class="fas fa-envelope"></i> E-Mail schreiben</a>
                 <a href="https://wa.me/4915736841062" class="button glass whatsapp-btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Chat</a>
