@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="style.css?v=1.7">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
                 <li><a href="#preise">Preise</a></li>
                 <li><a href="#ablauf">Ablauf</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#rechner">Kostenrechner</a></li>
+                <li><a href="#" id="calc-open-btn"><i class="fas fa-calculator"></i> Kostenrechner</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
                 <li><a href="#" id="login-open-btn" class="nav-login-btn"><i class="fas fa-lock"></i> Status-Check</a></li>
                 <li>
@@ -46,7 +46,7 @@
         <section id="start" class="hero">
             <h1>Technik verdient eine <span class="glow-text">zweite Chance.</span></h1>
             <p>Reparatur von Smartphones, PCs und Laptops. Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.</p>
-            <a href="#rechner" class="button glow-btn">Kosten berechnen</a>
+            <a href="#" id="hero-calc-btn" class="button glow-btn">Kosten berechnen</a>
         </section>
     </header>
 
@@ -167,43 +167,8 @@
             </div>
         </section>
 
-        <section id="rechner" class="rechner">
-            <h2>Kostenrechner (Schätzung)</h2>
-            <p class="rechner-intro">Wähle deine Kategorie und den gewünschten Dienst aus, um sofort eine unverbindliche Preisschätzung zu erhalten.</p>
-            
-            <div class="rechner-container glass">
-                <div class="input-group">
-                    <label for="calc-category">1. Kategorie wählen</label>
-                    <select id="calc-category">
-                        <option value="smartphone">📱 Smartphone</option>
-                        <option value="pc-laptop">💻 PC & Laptop</option>
-                        <option value="daten-service">💾 Datenrettung & Windows-Service</option>
-                        <option value="smarthome">🏠 Smart Home & Beratung</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="calc-service">2. Defekt / Service wählen</label>
-                    <select id="calc-service">
-                        </select>
-                </div>
-
-                <div class="price-display-box">
-                    <span class="price-label">Geschätzte Kosten:</span>
-                    <div id="calc-price-result" class="calculated-price">0 €</div>
-                    <p class="price-disclaimer">*Genauer Festpreis erfolgt erst nach kostenloser/günstiger Diagnose vor Ort. Zzgl. eventueller Materialkosten bei Hardware-Tausch.</p>
-                </div>
-
-                <div class="rechner-actions">
-                    <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener noreferrer" class="button whatsapp-calc-btn">
-                        <i class="fab fa-whatsapp"></i> Mit diesem Ergebnis anfragen
-                    </a>
-                </div>
-            </div>
-        </section>
-
         <section id="kontakt" class="kontakt">
-            <h2>Direkter Kontakt</h2>
+            <h2>Kontakt</h2>
             <p>Melde dich unkompliziert bei uns. Termin nach Vereinbarung.</p>
             <div class="kontakt-buttons">
                 <a href="mailto:technikcafewr@gmail.com" class="button glass"><i class="fas fa-envelope"></i> E-Mail schreiben</a>
@@ -211,6 +176,41 @@
             </div>
         </section>
     </main>
+
+    <div id="calc-modal" class="modal-overlay">
+        <div class="modal-content glass calc-modal-content">
+            <button id="calc-close-btn" class="modal-close" aria-label="Schließen">&times;</button>
+            <h3><i class="fas fa-calculator"></i> Kostenrechner</h3>
+            <p class="modal-desc">Finde schnell heraus, mit welchen Kosten du ungefähr rechnen kannst.</p>
+            
+            <div class="input-group">
+                <label for="calc-category">1. Gerät / Service-Typ</label>
+                <select id="calc-category">
+                    <option value="apple">🍏 Smartphone: Apple iPhone</option>
+                    <option value="samsung-s">📱 Smartphone: Samsung Galaxy S-Reihe</option>
+                    <option value="samsung-a">📱 Smartphone: Samsung Galaxy A-Reihe</option>
+                    <option value="pc-laptop">💻 PC & Laptop Hardware</option>
+                    <option value="daten-software">💿 Software, Daten & Netzwerke</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="calc-service">2. Gewünschter Service / Defekt</label>
+                <select id="calc-service">
+                    </select>
+            </div>
+
+            <div class="price-display-box">
+                <span class="price-label">Geschätzter Preis:</span>
+                <div id="calc-price-result" class="calculated-price">0 €</div>
+                <p class="price-disclaimer">*Preise sind Richtwerte inkl. Arbeitszeit. Exakte Angebote folgen nach finaler Fehleranalyse vor Ort. Zzgl. Materialkosten bei Displays/Akkus.</p>
+            </div>
+
+            <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener noreferrer" class="button whatsapp-calc-btn">
+                <i class="fab fa-whatsapp"></i> Mit diesem Ergebnis anfragen
+            </a>
+        </div>
+    </div>
 
     <div id="login-modal" class="modal-overlay">
         <div class="modal-content glass">
@@ -304,52 +304,76 @@
             }
         });
 
-        // --- STATUS-MODAL EVENT LOGIK ---
+        // --- MODAL EVENT STEUERUNG (Zwei separate Fenster) ---
         const loginOpenBtn = document.getElementById('login-open-btn');
         const loginCloseBtn = document.getElementById('login-close-btn');
         const loginModal = document.getElementById('login-modal');
+        
+        const calcOpenBtn = document.getElementById('calc-open-btn');
+        const heroCalcBtn = document.getElementById('hero-calc-btn');
+        const calcCloseBtn = document.getElementById('calc-close-btn');
+        const calcModal = document.getElementById('calc-modal');
+        
         const menuToggle = document.getElementById('menu-toggle');
 
+        // Status Modal
         loginOpenBtn.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.classList.add('open');
             if (menuToggle) menuToggle.checked = false; 
         });
+        loginCloseBtn.addEventListener('click', () => loginModal.classList.remove('open'));
 
-        loginCloseBtn.addEventListener('click', () => {
-            loginModal.classList.remove('open');
-        });
+        // Kostenrechner Modal
+        const openCalc = (e) => {
+            e.preventDefault();
+            calcModal.classList.add('open');
+            if (menuToggle) menuToggle.checked = false;
+        };
+        calcOpenBtn.addEventListener('click', openCalc);
+        heroCalcBtn.addEventListener('click', openCalc);
+        calcCloseBtn.addEventListener('click', () => calcModal.classList.remove('open'));
 
+        // Klick außerhalb schließt Modale
         window.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                loginModal.classList.remove('open');
-            }
+            if (e.target === loginModal) loginModal.classList.remove('open');
+            if (e.target === calcModal) calcModal.classList.remove('open');
         });
 
-        // --- 🧮 DYNAMISCHE KOSTENRECHNER LOGIK ---
+        // --- 🧮 ERWEITERTE & REALISTISCHERE KOSTENRECHNER LOGIK ---
         const servicesData = {
-            smartphone: [
-                { text: "🔋 Akkuwechsel (inkl. Arbeit)", price: "ab 49 €" },
-                { text: "📱 Displaywechsel / Glasbruch", price: "ab 79 €" },
-                { text: "🔌 Ladeanschluss reinigen / tauschen", price: "ab 39 €" },
-                { text: "⚙️ Softwarefehler / Bootloop", price: "39 €" }
+            apple: [
+                { text: "🔋 iPhone Akkuwechsel (Modelle bis iPhone 11)", price: "59 €" },
+                { text: "🔋 iPhone Akkuwechsel (Neuere Generationen ab iPhone 12)", price: "ab 79 €" },
+                { text: "📱 iPhone Displaybruch / Glasreparatur (Standard)", price: "ab 89 €" },
+                { text: "📱 iPhone Displaybruch / OLED-Originalqualität", price: "ab 139 €" },
+                { text: "🔌 Ladebuchse reinigen / Kontaktspray-Service", price: "29 €" },
+                { text: "⚙️ iOS Systemwiederherstellung & Datenübertrag", price: "49 €" }
+            ],
+            "samsung-s": [
+                { text: "🔋 Galaxy S-Reihe Akkuwechsel (z.B. S20, S21, S22)", price: "69 €" },
+                { text: "📱 Galaxy S-Reihe Displaywechsel (AMOLED Original)", price: "ab 149 €" },
+                { text: "📸 Kamera-Schutzglas Rückseite ersetzen", price: "39 €" },
+                { text: "🔌 USB-C Ladeanschluss Austausch", price: "69 €" }
+            ],
+            "samsung-a": [
+                { text: "🔋 Galaxy A-Reihe Akkuwechsel (z.B. A52, A53, A14)", price: "49 €" },
+                { text: "📱 Galaxy A-Reihe Displaytausch komplett", price: "ab 79 €" },
+                { text: "🔌 Ladeanschluss Probleme beheben", price: "49 €" }
             ],
             "pc-laptop": [
-                { text: "🚀 SSD-Upgrade (inkl. Windows Klonen)", price: "ab 69 €" },
-                { text: "🧹 Professionelle Innenreinigung & Wärmeleitpaste", price: "49 €" },
-                { text: "💻 Displaytausch Notebook", price: "ab 99 €" },
-                { text: "🔌 Netzteil- oder Hardwaredefekt prüfen", price: "ab 29 €" }
+                { text: "🧹 Notebook/PC Innenreinigung & frische Wärmeleitpaste", price: "49 €" },
+                { text: "🚀 500GB / 1TB SSD Upgrade inkl. Windows Klonen", price: "89 €" },
+                { text: "💻 Notebook Displaybruch Reparatur", price: "ab 119 €" },
+                { text: "🔌 PC-Netzteil / Grafikkarte austauschen (zzgl. Teil)", price: "39 €" },
+                { text: "🔍 Komplettdiagnose Hardware-Fehler", price: "29 €" }
             ],
-            "daten-service": [
-                { text: "💾 Datenrettung von HDD/SSD/USB-Stick", price: "ab 49 €" },
-                { text: "💿 Windows Neuinstallation (inkl. Treiber & Updates)", price: "69 €" },
-                { text: "🛡️ Viren- und Schadsoftware-Entfernung", price: "59 €" },
-                { text: "☁️ Backup-System einrichten (Lokal/Cloud)", price: "ab 49 €" }
-            ],
-            smarthome: [
-                { text: "🏠 Home Assistant Grundkonfiguration", price: "Nach Aufwand" },
-                { text: "🌐 WLAN-Optimierung / Mesh-Netzwerk einrichten", price: "ab 59 €" },
-                { text: "💡 Kaufberatung & Setup neuer Geräte (vor Ort)", price: "Nach Aufwand" }
+            "daten-software": [
+                { text: "💿 Windows 10/11 Neuinstallation inkl. aller Treiber", price: "69 €" },
+                { text: "🛡️ Bereinigung: Viren, Trojaner & Adware entfernen", price: "59 €" },
+                { text: "💾 Datenrettung von defekten/gelöschten Medien", price: "ab 49 €" },
+                { text: "🌐 WLAN-Optimierung & Router vor Ort einrichten", price: "69 €" },
+                { text: "🏠 Smart Home Beratung / Home Assistant Setup", price: "Nach Aufwand" }
             ]
         };
 
@@ -362,7 +386,6 @@
             const selectedCategory = categorySelect.value;
             const services = servicesData[selectedCategory];
             
-            // Dropdown leeren und neu befüllen
             serviceSelect.innerHTML = "";
             services.forEach((service, index) => {
                 const option = document.createElement('option');
@@ -383,16 +406,16 @@
             const service = servicesData[selectedCategory][selectedServiceIndex];
             priceResult.textContent = service.price;
 
-            // WhatsApp Link dynamisch generieren mit vorgefertigtem Text
+            // WhatsApp-Direktanfrage
             const phoneNumber = "4915736841062";
-            const message = `Hallo TechnikCafé, ich habe den Kostenrechner genutzt. Ich interessiere mich für: ${service.text} (${service.price}). Können wir dazu einen Termin vereinbaren?`;
+            const message = `Hallo TechnikCafé! Ich habe euren Kostenrechner ausprobiert. Ich benötige Hilfe bei folgendem Service: ${service.text} (${service.price}). Wann hättet ihr Zeit für einen Termin?`;
             whatsappCalcBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         }
 
         categorySelect.addEventListener('change', updateCalculator);
         serviceSelect.addEventListener('change', calculatePrice);
 
-        // Initialisierung beim Laden der Seite
+        // Startkonfiguration
         updateCalculator();
     </script>
 </body>
