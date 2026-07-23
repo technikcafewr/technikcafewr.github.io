@@ -25,83 +25,6 @@ html, body {
     line-height: 1.6;
 }
 
-/* --- ⚡ INTRO SCREEN STYLING & ANIMATIONEN --- */
-#intro-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #060913;
-    z-index: 9999; /* Über allem anderen */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
-}
-
-/* Klasse wird nach 2 Sekunden per JS hinzugefügt */
-#intro-screen.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.intro-content {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Pulsierendes Logo */
-.intro-logo-img {
-    height: 90px;
-    width: auto;
-    object-fit: contain;
-    animation: logoPulse 2s ease-in-out infinite alternate;
-}
-
-.intro-text {
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-shadow: 0 0 20px var(--accent-glow);
-}
-
-/* Cyberpunk Ladebalken */
-.loading-bar {
-    width: 180px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-.loading-bar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background: var(--accent);
-    box-shadow: 0 0 10px var(--accent);
-    animation: fillBar 2s linear forwards;
-}
-
-/* Keyframes für das Intro */
-@keyframes logoPulse {
-    0% { transform: scale(0.95); filter: drop-shadow(0 0 5px transparent); }
-    100% { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--accent-glow)); }
-}
-
-@keyframes fillBar {
-    0% { width: 0%; }
-    100% { width: 100%; }
-}
-
 /* --- 🌌 ANIMIERTER HINTERGRUND --- */
 .bg-animation {
     position: fixed;
@@ -221,6 +144,36 @@ nav a:hover { color: var(--accent); }
 .glow-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 25px var(--accent);
+}
+
+/* --- 📊 COUNTER (STATS) STYLING --- */
+.stats {
+    padding: 20px 5% 60px 5%;
+}
+
+.stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 25px;
+}
+
+.stat-wrapper {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-shadow: 0 0 15px var(--accent-glow);
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.stat-card p {
+    font-size: 1.05rem;
+    color: #9ca3af;
+    font-weight: 500;
 }
 
 /* --- 📦 SEKTIONEN & CARDS --- */
