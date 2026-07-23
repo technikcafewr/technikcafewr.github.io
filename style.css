@@ -118,7 +118,7 @@ body.light-mode .nav-login-btn:hover { color: #fff !important; }
 }
 body.light-mode .button { color: #fff; }
 
-/* 📊 STATISTIKEN (ZÄHLER) */
+/* 📊 STATISTIKEN */
 .stats { padding: 20px 5% 60px 5%; }
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .stat-card { text-align: center; padding: 25px; }
@@ -137,7 +137,7 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .warum-list { list-style: none; max-width: 650px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
 .warum-list li { padding: 18px 25px; }
 
-/* 🙋‍♂️ INTERAKTIVES FAQ ACCORDION */
+/* 🙋‍♂️ FAQ ACCORDION */
 .faq-container { max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
 .faq-item { overflow: hidden; padding: 0; }
 .faq-question { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 1.1rem; font-weight: 600; user-select: none; }
@@ -147,7 +147,48 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .faq-item.active .faq-answer { max-height: 300px; }
 .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-/* 🔒 MODAL OVERLAY POSITIONIERUNGS-FIX (Über der Website zentriert) */
+/* 📝 INTERAKTIVES KONTAKTFORMULAR LAYOUT */
+.anfrage { background: rgba(72, 213, 151, 0.02); }
+.form-container { max-width: 750px; margin: 0 auto; padding: 40px 35px; box-sizing: border-box; }
+.form-row { display: flex; gap: 20px; margin-bottom: 5px; }
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+    width: 100%;
+}
+.input-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border-glass);
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus { 
+    border-color: var(--accent); 
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Spezielles Styling für das Select Dropdown im Light/Dark Mode */
+.input-group select option {
+    background: var(--bg-color);
+    color: var(--text-main);
+}
+
+.text-group { margin-bottom: 25px; }
+.form-submit-btn { width: 100%; border: none; text-align: center; }
+
+/* 🔒 MODAL OVERLAY POSITIONIERUNG */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -166,11 +207,7 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
     transition: opacity 0.3s ease;
     padding: 20px;
 }
-
-.modal-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-}
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
 
 .modal-content {
     width: 100%;
@@ -196,62 +233,12 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .modal-close:hover { color: var(--accent); }
 
 .modal-content h3 { 
-    font-size: 1.4rem; 
-    margin-bottom: 8px; 
-    margin-top: 10px;
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-    color: var(--text-main);
+    font-size: 1.4rem; margin-bottom: 8px; margin-top: 10px;
+    display: flex; align-items: center; gap: 10px; color: var(--text-main);
 }
+.modal-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; line-height: 1.4; }
 
-.modal-desc { 
-    color: var(--text-muted); 
-    font-size: 0.9rem; 
-    margin-bottom: 25px; 
-    line-height: 1.4;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 18px;
-    width: 100%;
-}
-
-.input-group label { 
-    font-size: 0.85rem; 
-    font-weight: 600; 
-    color: var(--text-main); 
-}
-
-.input-group input {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--border-glass);
-    padding: 12px 14px;
-    border-radius: 8px;
-    color: var(--text-main);
-    font-size: 1rem;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.input-group input:focus { 
-    border-color: var(--accent); 
-    box-shadow: 0 0 10px var(--accent-glow);
-}
-
-.form-submit-btn { 
-    width: 100%; 
-    margin-top: 10px; 
-    border: none;
-    text-align: center;
-}
-
-/* 📞 KONTAKT & FOOTER & FIXES */
+/* 📞 DIREKTER KONTAKT & FOOTER */
 .kontakt { text-align: center; }
 .kontakt-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 25px; }
 .kontakt-buttons .button { color: var(--text-main); display: flex; align-items: center; gap: 10px; }
@@ -260,10 +247,13 @@ footer { padding: 30px; text-align: center; background: rgba(15, 23, 42, 0.9); b
 body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
 .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: #fff; border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 99; text-decoration: none; }
 
-/* 📱 SMARTPHONE RESPONSIVENESS */
+/* 📱 RESPONSIVENESS (SMARTPHONES) */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.0rem; }
     section { padding: 50px 5%; }
+    .form-row { flex-direction: column; gap: 0; }
+    .form-container { padding: 25px 20px; }
+    
     .menu-hamburger { display: flex; flex-direction: column; gap: 5px; }
     .menu-hamburger span { display: block; width: 26px; height: 3px; background: var(--text-main); }
     
