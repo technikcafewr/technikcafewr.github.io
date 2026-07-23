@@ -30,7 +30,14 @@
                 <li><a href="#leistungen">Leistungen</a></li>
                 <li><a href="#preise">Preise</a></li>
                 <li><a href="#ablauf">Ablauf</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-btn" aria-label="Farbschema wechseln">
+                        <i class="fas fa-moon id-dark"></i>
+                        <i class="fas fa-sun id-light" style="display: none;"></i>
+                    </button>
+                </li>
             </ul>
         </nav>
 
@@ -131,6 +138,41 @@
             </ul>
         </section>
 
+        <section id="faq" class="faq">
+            <h2>Häufige Fragen</h2>
+            <div class="faq-container">
+                <div class="faq-item glass">
+                    <button class="faq-question">
+                        <span>Wie lange dauert eine Reparatur im Durchschnitt?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Viele Smartphone-Reparaturen (wie Display- oder Akkuwechsel) erledigen wir innerhalb weniger Stunden. Bei aufwendigeren PC-Fehlersuchen oder Datenrettungen kann es 1-3 Werktage dauern. Wir geben dir bei der Diagnose immer eine genaue Einschätzung.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass">
+                    <button class="faq-question">
+                        <span>Was passiert mit meinen privaten Daten?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Deine Daten sind bei uns absolut sicher. Datenschutz hat höchste Priorität. Sofern es für die Reparatur nicht zwingend notwendig ist, verlangen wir keine Sperrcodes. Vor größeren Eingriffen versuchen wir zudem immer, deine Daten redundant zu sichern.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass">
+                    <button class="faq-question">
+                        <span>Muss ich vorab einen Termin vereinbaren?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ja, bitte halte kurz Rücksprache mit uns per WhatsApp oder E-Mail. Da wir uns für jede Beratung und Diagnose ausreichend Zeit nehmen möchten, arbeiten wir ausschließlich nach vorheriger Terminvereinbarung.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="kontakt" class="kontakt">
             <h2>Kontakt</h2>
             <p>Melde dich unkompliziert bei uns. Termin nach Vereinbarung.</p>
@@ -150,17 +192,15 @@
     </footer>
 
     <script>
+        // --- COUNTER LOGIK ---
         const stats = document.querySelectorAll('.stat-number');
-        
         const startCounter = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const target = entry.target;
                     const targetNumber = parseInt(target.getAttribute('data-target'), 10);
                     let currentNumber = 0;
-                    
-                    // Berechnet die Geschwindigkeit basierend auf der Zielzahl
-                    const duration = 1500; // Animation dauert genau 1.5 Sekunden
+                    const duration = 1500;
                     const stepTime = Math.max(Math.floor(duration / targetNumber), 15);
                     
                     const counter = setInterval(() => {
@@ -172,17 +212,53 @@
                             target.innerText = currentNumber;
                         }
                     }, stepTime);
-                    
-                    observer.unobserve(target); // Animation nur einmal ausführen
+                    observer.unobserve(target);
                 }
             });
         };
+        const observer = new IntersectionObserver(startCounter, { threshold: 0.3 });
+        stats.forEach(stat => observer.observe(stat));
 
-        const observer = new IntersectionObserver(startCounter, {
-            threshold: 0.3 // Startet, wenn 30% der Sektion sichtbar sind
+        // --- 🙋‍♂️ FAQ AKKORDEON LOGIK ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                
+                // Schließt andere offene FAQs (optional, sorgt für Ordnung)
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) otherItem.classList.remove('active');
+                });
+
+                item.classList.toggle('active');
+            });
         });
 
-        stats.forEach(stat => observer.observe(stat));
+        // --- 🌓 DARK/LIGHT MODE LOGIK ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const moonIcon = themeToggle.querySelector('.id-dark');
+        const sunIcon = themeToggle.querySelector('.id-light');
+
+        // Prüfen, ob der User bereits eine Präferenz gespeichert hat
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'inline-block';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'inline-block';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                moonIcon.style.display = 'inline-block';
+                sunIcon.style.display = 'none';
+            }
+        });
     </script>
 
 </body>
