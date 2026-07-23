@@ -11,7 +11,7 @@
     --input-bg: rgba(31, 41, 55, 0.5);
 }
 
-/* 🌓 LIGHT MODE */
+/* 🌓 LIGHT MODE VARIANTE */
 body.light-mode {
     --bg-color: #f0f4f8 !important;
     --surface-glass: rgba(255, 255, 255, 0.75) !important;
@@ -62,7 +62,7 @@ html, body {
 
 .accent { color: var(--accent); }
 
-/* 🧭 NAVIGATION & LOGIN-BUTTON */
+/* 🧭 NAVIGATION & STATUS-BUTTON */
 nav {
     display: flex;
     justify-content: space-between;
@@ -99,7 +99,7 @@ body.light-mode .nav-login-btn:hover { color: #fff !important; }
 .theme-btn { background: transparent; border: none; color: var(--text-main); font-size: 1.2rem; cursor: pointer; display: flex; }
 .menu-toggle, .menu-hamburger { display: none; }
 
-/* 🚀 HERO */
+/* 🚀 HERO SECTION */
 .hero { text-align: center; padding: 120px 20px 80px 20px; max-width: 900px; margin: 0 auto; }
 .hero h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; }
 .glow-text { color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
@@ -118,13 +118,13 @@ body.light-mode .nav-login-btn:hover { color: #fff !important; }
 }
 body.light-mode .button { color: #fff; }
 
-/* 📊 STATS */
+/* 📊 STATISTIKEN (ZÄHLER) */
 .stats { padding: 20px 5% 60px 5%; }
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .stat-card { text-align: center; padding: 25px; }
 .stat-wrapper { font-size: 3rem; font-weight: 800; color: var(--accent); }
 
-/* 📦 CARDS SYSTEM */
+/* 📦 BOXEN & LAYOUTS */
 section { padding: 80px 5%; }
 h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
@@ -137,7 +137,7 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .warum-list { list-style: none; max-width: 650px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
 .warum-list li { padding: 18px 25px; }
 
-/* 🙋‍♂️ FAQ */
+/* 🙋‍♂️ INTERAKTIVES FAQ ACCORDION */
 .faq-container { max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
 .faq-item { overflow: hidden; padding: 0; }
 .faq-question { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 1.1rem; font-weight: 600; user-select: none; }
@@ -147,23 +147,24 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .faq-item.active .faq-answer { max-height: 300px; }
 .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-/* 🔒 MODAL OVERLAY DESIGN (Status-Login) */
+/* 🔒 MODAL OVERLAY POSITIONIERUNGS-FIX (Über der Website zentriert) */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    background: rgba(11, 15, 25, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 200;
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    padding: 20px;
 }
 
 .modal-overlay.open {
@@ -172,52 +173,85 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 }
 
 .modal-content {
-    width: 90%;
-    max-width: 450px;
-    padding: 35px;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px 25px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    box-sizing: border-box;
 }
 
 .modal-close {
     position: absolute;
     top: 15px;
     right: 20px;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
+    background: transparent !important;
+    border: none !important;
+    font-size: 2.2rem;
     color: var(--text-muted);
     cursor: pointer;
+    line-height: 1;
 }
 .modal-close:hover { color: var(--accent); }
 
-.modal-content h3 { font-size: 1.6rem; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
-.modal-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; }
+.modal-content h3 { 
+    font-size: 1.4rem; 
+    margin-bottom: 8px; 
+    margin-top: 10px;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    color: var(--text-main);
+}
+
+.modal-desc { 
+    color: var(--text-muted); 
+    font-size: 0.9rem; 
+    margin-bottom: 25px; 
+    line-height: 1.4;
+}
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-    text-align: left;
+    gap: 6px;
+    margin-bottom: 18px;
+    width: 100%;
 }
 
-.input-group label { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+.input-group label { 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    color: var(--text-main); 
+}
+
 .input-group input {
+    width: 100%;
     background: var(--input-bg);
     border: 1px solid var(--border-glass);
-    padding: 12px 15px;
+    padding: 12px 14px;
     border-radius: 8px;
     color: var(--text-main);
     font-size: 1rem;
     outline: none;
-    transition: border-color 0.2s;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input-group input:focus { border-color: var(--accent); }
 
-.form-submit-btn { width: 100%; margin-top: 10px; }
+.input-group input:focus { 
+    border-color: var(--accent); 
+    box-shadow: 0 0 10px var(--accent-glow);
+}
 
-/* FOOTER & WHATSAPP */
+.form-submit-btn { 
+    width: 100%; 
+    margin-top: 10px; 
+    border: none;
+    text-align: center;
+}
+
+/* 📞 KONTAKT & FOOTER & FIXES */
 .kontakt { text-align: center; }
 .kontakt-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 25px; }
 .kontakt-buttons .button { color: var(--text-main); display: flex; align-items: center; gap: 10px; }
@@ -226,7 +260,7 @@ footer { padding: 30px; text-align: center; background: rgba(15, 23, 42, 0.9); b
 body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
 .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: #fff; border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 99; text-decoration: none; }
 
-/* 📱 RESPONSIVE */
+/* 📱 SMARTPHONE RESPONSIVENESS */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.0rem; }
     section { padding: 50px 5%; }
