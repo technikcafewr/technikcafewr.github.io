@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-    <link rel="stylesheet" href="style.css?v=1.8">
+    <link rel="stylesheet" href="style.css?v=1.9">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -213,7 +213,7 @@
             <div class="price-display-box">
                 <span class="price-label">Voraussichtlicher Richtpreis:</span>
                 <div id="calc-price-result" class="calculated-price">0 €</div>
-                <p class="price-disclaimer">*Preise basieren auf typischen Ersatzteilkosten und Arbeitsaufwand. Der exakte Festpreis wird nach einer schnellen Überprüfung vor Ort ermittelt.</p>
+                <p class="price-disclaimer">*Preise basieren auf marktüblichen Ersatzteilkosten und kalkulierter Arbeitszeit. Der exakte Festpreis wird nach einer Überprüfung vor Ort ermittelt.</p>
             </div>
 
             <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener noreferrer" class="button whatsapp-calc-btn">
@@ -347,7 +347,7 @@
             if (e.target === calcModal) calcModal.classList.remove('open');
         });
 
-        // --- 🧮 DYNAMISCHE & STRUKTURIERTE PREIS-DATENBANK ---
+        // --- 🧮 MARKTÜBLICHE & HOCHKALKULIERTE PREIS-DATENBANK ---
         const db = {
             smartphone: {
                 brands: { apple: "Apple iPhone", samsung: "Samsung Galaxy" },
@@ -393,7 +393,7 @@
                     galaxyA: [
                         { text: "📱 Displaywechsel komplett", price: "ab 89 €" },
                         { text: "🔋 Akkuwechsel", price: "59 €" },
-                        { text: "🔌 Ladebuchsen-Platine tauschen", price: "49 €" }
+                        { text: "🔌 Ladeanschluss-Platine tauschen", price: "49 €" }
                     ]
                 }
             },
@@ -405,12 +405,12 @@
                 },
                 services: {
                     standard: [
-                        { text: "🧹 Tiefenreinigung & Premium Wärmeleitpaste (mx-4/6)", price: "49 €" },
-                        { text: "🚀 500GB SSD-Upgrade inkl. Windows & Datenumzug", price: "89 €" },
-                        { text: "🚀 1TB SSD-Upgrade inkl. Windows & Datenumzug", price: "119 €" },
-                        { text: "🔌 Netzteil-Austausch bei Defekt (zzgl. Hardware)", price: "39 €" },
-                        { text: "💻 Notebook Displaytausch (15.6 Zoll Standard)", price: "139 €" },
-                        { text: "🔍 Umfassende Hardware-Fehlersuche & Diagnose", price: "29 €" }
+                        { text: "🧹 Tiefenreinigung & Premium Wärmeleitpaste (MX-6)", price: "59 €" },
+                        { text: "🚀 500GB SSD-Upgrade inkl. Windows & Datenumzug", price: "99 €" },
+                        { text: "🚀 1TB SSD-Upgrade inkl. Windows & Datenumzug", price: "139 €" },
+                        { text: "🔌 Netzteil-Austausch bei Defekt (zzgl. Hardware)", price: "49 €" },
+                        { text: "💻 Notebook Displaytausch (15.6 Zoll IPS Standard)", price: "ab 149 €" },
+                        { text: "🔍 Umfassende Hardware-Fehlersuche & Diagnose", price: "39 €" }
                     ]
                 }
             },
@@ -422,20 +422,19 @@
                 },
                 services: {
                     softall: [
-                        { text: "💿 Windows 10/11 Neuinstallation sauber mit Treubern", price: "69 €" },
-                        { text: "🛡️ Viren-, Adware- & Schadsoftware-Entfernung", price: "59 €" },
-                        { text: "💾 Logische Datenrettung (gelöschte Bilder/Dokumente)", price: "ab 49 €" },
-                        { text: "🔄 Systemumzug auf neuen PC/Laptop", price: "79 €" }
+                        { text: "💿 Windows 10/11 Neuinstallation sauber mit Treibern", price: "79 €" },
+                        { text: "🛡️ Bereinigung: Viren, Trojaner & Adware entfernen", price: "69 €" },
+                        { text: "💾 Logische Datenrettung (wichtige Bilder & Dokumente)", price: "ab 79 €" },
+                        { text: "🔄 Systemumzug auf neuen PC/Laptop komplett", price: "89 €" }
                     ],
                     netall: [
-                        { text: "🌐 WLAN-Einrichtung, Mesh & Router Konfiguration vor Ort", price: "69 €" },
+                        { text: "🌐 WLAN-Einrichtung, Mesh & Router Konfiguration vor Ort", price: "79 €" },
                         { text: "🏠 Home Assistant Smart-Home Beratung & Basis-Setup", price: "Nach Aufwand" }
                     ]
                 }
             }
         };
 
-        // DOM Elemente abrufen
         const mainCatSelect = document.getElementById('calc-main-cat');
         const brandSelect = document.getElementById('calc-brand');
         const modelSelect = document.getElementById('calc-model-series');
@@ -447,7 +446,6 @@
             const mainCat = mainCatSelect.value;
             const currentData = db[mainCat];
 
-            // 1. Marken befüllen
             brandSelect.innerHTML = "";
             for (let key in currentData.brands) {
                 let opt = document.createElement('option');
@@ -480,7 +478,6 @@
             const mainCat = mainCatSelect.value;
             let modelKey = modelSelect.value;
             
-            // Fallback für PC/Software wo alle denselben Key nutzen
             if (mainCat !== 'smartphone') {
                 modelKey = "standard";
                 if (mainCat === 'software-network') {
@@ -518,20 +515,17 @@
             if (selectedService) {
                 priceResult.textContent = selectedService.price;
                 
-                // Generiere den WhatsApp Text
                 const phone = "4915736841062";
                 const text = `Hallo TechnikCafé, ich habe euren Rechner genutzt. Ich interessiere mich für folgenden Service:\n👉 ${selectedService.text} (${selectedService.price}).\nWann hättet ihr Zeit für eine genauere Absprache oder Diagnose?`;
                 whatsappCalcBtn.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
             }
         }
 
-        // Event Listener verknüpfen
         mainCatSelect.addEventListener('change', rebuildDropdowns);
         brandSelect.addEventListener('change', updateModels);
         modelSelect.addEventListener('change', updateServices);
         serviceSelect.addEventListener('change', showFinalPrice);
 
-        // Initialer Start beim Seitenaufruf
         rebuildDropdowns();
     </script>
 </body>
