@@ -18,11 +18,88 @@
 html, body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden; /* 🛠️ WICHTIG: Verhindert das seitliche Scrollen komplett! */
+    overflow-x: hidden;
     background: var(--bg-color);
     color: var(--text-main);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
+}
+
+/* --- ⚡ INTRO SCREEN STYLING & ANIMATIONEN --- */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #060913;
+    z-index: 9999; /* Über allem anderen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+}
+
+/* Klasse wird nach 2 Sekunden per JS hinzugefügt */
+#intro-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Pulsierendes Logo */
+.intro-logo-img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+    animation: logoPulse 2s ease-in-out infinite alternate;
+}
+
+.intro-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Cyberpunk Ladebalken */
+.loading-bar {
+    width: 180px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: fillBar 2s linear forwards;
+}
+
+/* Keyframes für das Intro */
+@keyframes logoPulse {
+    0% { transform: scale(0.95); filter: drop-shadow(0 0 5px transparent); }
+    100% { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--accent-glow)); }
+}
+
+@keyframes fillBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
 }
 
 /* --- 🌌 ANIMIERTER HINTERGRUND --- */
@@ -243,18 +320,18 @@ footer {
     border-top: 1px solid var(--border-glass);
 }
 
-/* 🟢 FLOATING WHATSAPP BUTTON (🛠️ Korrigiert für Mobilgeräte) */
+/* 🟢 FLOATING WHATSAPP BUTTON */
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
-    right: 20px; /* 🛠️ Sicherer Abstand zum Rand */
+    right: 20px;
     background-color: #25d366;
     color: #fff;
     border-radius: 50%;
     text-align: center;
     font-size: 28px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    z-index: 99; /* Leicht unter dem mobilen Menü z-index */
+    z-index: 99;
     width: 55px;
     height: 55px;
     display: flex;
@@ -265,13 +342,12 @@ footer {
 }
 .whatsapp-float:hover { transform: scale(1.1); }
 
-/* --- 📱 RESPONSIVE DESIGN (MEDIA QUERIES) --- */
+/* --- 📱 RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.0rem; }
     .hero p { font-size: 1.05rem; }
     section { padding: 50px 5%; }
     
-    /* Hamburger-Icon sichtbar machen */
     .menu-hamburger {
         display: flex;
         flex-direction: column;
@@ -287,11 +363,10 @@ footer {
         border-radius: 2px;
     }
 
-    /* 🛠️ Korrigiertes Smartphone-Menü */
     nav ul {
         position: fixed;
         top: 0;
-        right: -100%; /* Befindet sich komplett außerhalb des Bildschirms */
+        right: -100%;
         width: 80%;
         height: 100vh;
         background: rgba(11, 15, 25, 0.98);
@@ -301,18 +376,16 @@ footer {
         justify-content: center;
         align-items: center;
         gap: 35px;
-        transition: transform 0.4s ease-in-out, right 0s 0.4s; /* 🛠️ Verhindert Blitzen beim Laden */
+        transition: transform 0.4s ease-in-out, right 0s 0.4s;
         box-shadow: -10px 0 30px rgba(0,0,0,0.6);
         z-index: 104;
     }
 
-    /* Menü reinschieben, wenn Checkbox aktiv ist */
     .menu-toggle:checked ~ ul {
         right: 0;
         transition: transform 0.4s ease-in-out;
     }
     
-    /* Hamburger zu X */
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(2) { opacity: 0; }
     .menu-toggle:checked ~ .menu-hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
