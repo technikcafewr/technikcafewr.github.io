@@ -147,67 +147,7 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .faq-item.active .faq-answer { max-height: 300px; }
 .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-/* 🧮 KOSTENRECHNER DESIGN */
-.rechner { background: rgba(72, 213, 151, 0.01); text-align: center; }
-.rechner-intro { color: var(--text-muted); margin-top: -30px; margin-bottom: 40px; font-size: 1.1rem; }
-.rechner-container { max-width: 600px; margin: 0 auto; padding: 40px 35px; box-sizing: border-box; text-align: left; }
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 22px;
-    width: 100%;
-}
-.input-group label { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
-.input-group select, .input-group input {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--border-glass);
-    padding: 14px;
-    border-radius: 8px;
-    color: var(--text-main);
-    font-size: 1rem;
-    outline: none;
-    box-sizing: border-box;
-    font-family: inherit;
-    cursor: pointer;
-}
-.input-group select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 10px var(--accent-glow);
-}
-.input-group select option { background: var(--bg-color); color: var(--text-main); }
-
-/* Preisanzeige-Box */
-.price-display-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px dashed var(--border-glass);
-    border-radius: 12px;
-    padding: 25px 20px;
-    text-align: center;
-    margin: 30px 0;
-}
-.price-label { font-size: 0.95rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-.calculated-price { font-size: 3rem; font-weight: 800; color: var(--accent); margin: 10px 0; text-shadow: 0 0 15px var(--accent-glow); }
-.price-disclaimer { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
-
-.rechner-actions { text-align: center; }
-.whatsapp-calc-btn {
-    width: 100%;
-    background-color: #25d366;
-    color: #fff !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 20px;
-    border-radius: 10px;
-    font-size: 1.05rem;
-}
-.whatsapp-calc-btn:hover { background-color: #20ba59; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); transition: all 0.2s ease; }
-
-/* 🔒 MODAL OVERLAY POSITIONIERUNG */
+/* 🔒 GENERISCHES MODAL SYSTEM OVERLAY (Für Status & Rechner) */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -238,6 +178,9 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
     box-sizing: border-box;
 }
 
+/* Spezifisch breiteres Modal für den Kostenrechner */
+.calc-modal-content { max-width: 500px !important; }
+
 .modal-close {
     position: absolute;
     top: 15px;
@@ -257,6 +200,62 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 }
 .modal-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; line-height: 1.4; }
 
+/* INPUT & CONTROLS IN MODALEN */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+    width: 100%;
+}
+.input-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+.input-group input, .input-group select {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border-glass);
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+.input-group input:focus, .input-group select:focus { 
+    border-color: var(--accent); 
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+.input-group select option { background: var(--bg-color); color: var(--text-main); }
+.form-submit-btn { width: 100%; margin-top: 10px; border: none; text-align: center; }
+
+/* 🧮 KOSTENRECHNER BEREICH IM MODAL */
+.price-display-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-glass);
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    margin: 20px 0;
+}
+.price-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; }
+.calculated-price { font-size: 2.8rem; font-weight: 800; color: var(--accent); margin: 5px 0; text-shadow: 0 0 15px var(--accent-glow); }
+.price-disclaimer { font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; }
+
+.whatsapp-calc-btn {
+    width: 100%;
+    background-color: #25d366;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: none;
+}
+.whatsapp-calc-btn:hover { background-color: #20ba59; }
+
 /* 📞 DIREKTER KONTAKT & FOOTER */
 .kontakt { text-align: center; }
 .kontakt-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 25px; }
@@ -270,7 +269,6 @@ body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.0rem; }
     section { padding: 50px 5%; }
-    .rechner-container { padding: 25px 20px; }
     
     .menu-hamburger { display: flex; flex-direction: column; gap: 5px; }
     .menu-hamburger span { display: block; width: 26px; height: 3px; background: var(--text-main); }
