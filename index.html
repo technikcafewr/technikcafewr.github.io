@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-    <link rel="stylesheet" href="style.css?v=1.5">
+    <link rel="stylesheet" href="style.css?v=1.6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
                 <li><a href="#preise">Preise</a></li>
                 <li><a href="#ablauf">Ablauf</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#anfrage">Anfrage</a></li>
+                <li><a href="#rechner">Kostenrechner</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
                 <li><a href="#" id="login-open-btn" class="nav-login-btn"><i class="fas fa-lock"></i> Status-Check</a></li>
                 <li>
@@ -46,7 +46,7 @@
         <section id="start" class="hero">
             <h1>Technik verdient eine <span class="glow-text">zweite Chance.</span></h1>
             <p>Reparatur von Smartphones, PCs und Laptops. Windows-Service, Datenrettung, Smart Home und ehrliche Beratung.</p>
-            <a href="#anfrage" class="button glow-btn">Termin vereinbaren</a>
+            <a href="#rechner" class="button glow-btn">Kosten berechnen</a>
         </section>
     </header>
 
@@ -167,54 +167,44 @@
             </div>
         </section>
 
-        <section id="anfrage" class="anfrage">
-            <h2>Reparaturanfrage stellen</h2>
-            <div class="form-container glass">
-                <form onsubmit="event.preventDefault(); alert('Vielen Dank für deine Anfrage! Wir melden uns in Kürze bei dir.'); this.reset();">
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="form-name">Dein Name</label>
-                            <input type="text" id="form-name" placeholder="Max Mustermann" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="form-kontakt">E-Mail oder Telefonnummer</label>
-                            <input type="text" id="form-kontakt" placeholder="deine@email.de oder Handynummer" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="form-device">Gerätemodell</label>
-                            <input type="text" id="form-device" placeholder="z.B. iPhone 14 Pro, Lenovo ThinkPad" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="form-service">Was muss getan werden?</label>
-                            <select id="form-service" required>
-                                <option value="" disabled selected hidden>Bitte auswählen...</option>
-                                <option value="smartphone-display">📱 Smartphone Displaywechsel</option>
-                                <option value="smartphone-akku">🔋 Smartphone Akkuwechsel</option>
-                                <option value="pc-laptop">💻 PC / Laptop Reparatur & Upgrade</option>
-                                <option value="windows">💿 Windows Setup / Bereinigung</option>
-                                <option value="datenrettung">💾 Datenrettung & Sicherung</option>
-                                <option value="smarthome">🏠 Smart Home & Netzwerk Beratung</option>
-                                <option value="sonstiges">⚙️ Sonstiges / Fehler unklar</option>
-                            </select>
-                        </div>
-                    </div>
+        <section id="rechner" class="rechner">
+            <h2>Kostenrechner (Schätzung)</h2>
+            <p class="rechner-intro">Wähle deine Kategorie und den gewünschten Dienst aus, um sofort eine unverbindliche Preisschätzung zu erhalten.</p>
+            
+            <div class="rechner-container glass">
+                <div class="input-group">
+                    <label for="calc-category">1. Kategorie wählen</label>
+                    <select id="calc-category">
+                        <option value="smartphone">📱 Smartphone</option>
+                        <option value="pc-laptop">💻 PC & Laptop</option>
+                        <option value="daten-service">💾 Datenrettung & Windows-Service</option>
+                        <option value="smarthome">🏠 Smart Home & Beratung</option>
+                    </select>
+                </div>
 
-                    <div class="input-group text-group">
-                        <label for="form-message">Schadensbeschreibung / Details</label>
-                        <textarea id="form-message" rows="4" placeholder="Beschreibe kurz den Fehler (z.B. Lädt nicht mehr, Display flackert...)" required></textarea>
-                    </div>
+                <div class="input-group">
+                    <label for="calc-service">2. Defekt / Service wählen</label>
+                    <select id="calc-service">
+                        </select>
+                </div>
 
-                    <button type="submit" class="button form-submit-btn">Anfrage absenden</button>
-                </form>
+                <div class="price-display-box">
+                    <span class="price-label">Geschätzte Kosten:</span>
+                    <div id="calc-price-result" class="calculated-price">0 €</div>
+                    <p class="price-disclaimer">*Genauer Festpreis erfolgt erst nach kostenloser/günstiger Diagnose vor Ort. Zzgl. eventueller Materialkosten bei Hardware-Tausch.</p>
+                </div>
+
+                <div class="rechner-actions">
+                    <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener noreferrer" class="button whatsapp-calc-btn">
+                        <i class="fab fa-whatsapp"></i> Mit diesem Ergebnis anfragen
+                    </a>
+                </div>
             </div>
         </section>
 
         <section id="kontakt" class="kontakt">
             <h2>Direkter Kontakt</h2>
-            <p>Alternativ kannst du dich auch direkt unkompliziert bei uns melden. Termin nach Vereinbarung.</p>
+            <p>Melde dich unkompliziert bei uns. Termin nach Vereinbarung.</p>
             <div class="kontakt-buttons">
                 <a href="mailto:technikcafewr@gmail.com" class="button glass"><i class="fas fa-envelope"></i> E-Mail schreiben</a>
                 <a href="https://wa.me/4915736841062" class="button glass whatsapp-btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Chat</a>
@@ -335,6 +325,75 @@
                 loginModal.classList.remove('open');
             }
         });
+
+        // --- 🧮 DYNAMISCHE KOSTENRECHNER LOGIK ---
+        const servicesData = {
+            smartphone: [
+                { text: "🔋 Akkuwechsel (inkl. Arbeit)", price: "ab 49 €" },
+                { text: "📱 Displaywechsel / Glasbruch", price: "ab 79 €" },
+                { text: "🔌 Ladeanschluss reinigen / tauschen", price: "ab 39 €" },
+                { text: "⚙️ Softwarefehler / Bootloop", price: "39 €" }
+            ],
+            "pc-laptop": [
+                { text: "🚀 SSD-Upgrade (inkl. Windows Klonen)", price: "ab 69 €" },
+                { text: "🧹 Professionelle Innenreinigung & Wärmeleitpaste", price: "49 €" },
+                { text: "💻 Displaytausch Notebook", price: "ab 99 €" },
+                { text: "🔌 Netzteil- oder Hardwaredefekt prüfen", price: "ab 29 €" }
+            ],
+            "daten-service": [
+                { text: "💾 Datenrettung von HDD/SSD/USB-Stick", price: "ab 49 €" },
+                { text: "💿 Windows Neuinstallation (inkl. Treiber & Updates)", price: "69 €" },
+                { text: "🛡️ Viren- und Schadsoftware-Entfernung", price: "59 €" },
+                { text: "☁️ Backup-System einrichten (Lokal/Cloud)", price: "ab 49 €" }
+            ],
+            smarthome: [
+                { text: "🏠 Home Assistant Grundkonfiguration", price: "Nach Aufwand" },
+                { text: "🌐 WLAN-Optimierung / Mesh-Netzwerk einrichten", price: "ab 59 €" },
+                { text: "💡 Kaufberatung & Setup neuer Geräte (vor Ort)", price: "Nach Aufwand" }
+            ]
+        };
+
+        const categorySelect = document.getElementById('calc-category');
+        const serviceSelect = document.getElementById('calc-service');
+        const priceResult = document.getElementById('calc-price-result');
+        const whatsappCalcBtn = document.getElementById('calc-whatsapp-btn');
+
+        function updateCalculator() {
+            const selectedCategory = categorySelect.value;
+            const services = servicesData[selectedCategory];
+            
+            // Dropdown leeren und neu befüllen
+            serviceSelect.innerHTML = "";
+            services.forEach((service, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = service.text;
+                serviceSelect.appendChild(option);
+            });
+
+            calculatePrice();
+        }
+
+        function calculatePrice() {
+            const selectedCategory = categorySelect.value;
+            const selectedServiceIndex = serviceSelect.value;
+            
+            if (selectedServiceIndex === "" || !servicesData[selectedCategory]) return;
+
+            const service = servicesData[selectedCategory][selectedServiceIndex];
+            priceResult.textContent = service.price;
+
+            // WhatsApp Link dynamisch generieren mit vorgefertigtem Text
+            const phoneNumber = "4915736841062";
+            const message = `Hallo TechnikCafé, ich habe den Kostenrechner genutzt. Ich interessiere mich für: ${service.text} (${service.price}). Können wir dazu einen Termin vereinbaren?`;
+            whatsappCalcBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        }
+
+        categorySelect.addEventListener('change', updateCalculator);
+        serviceSelect.addEventListener('change', calculatePrice);
+
+        // Initialisierung beim Laden der Seite
+        updateCalculator();
     </script>
 </body>
 </html>
