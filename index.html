@@ -9,6 +9,16 @@
 </head>
 <body>
 
+    <div id="intro-screen">
+        <div class="intro-content">
+            <div class="intro-logo-container">
+                <img src="assets/img/tc.png" alt="Logo" class="intro-logo-img">
+            </div>
+            <h1 class="intro-text">Technik<span class="accent">Café</span></h1>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
     <div class="bg-animation"></div>
 
     <header>
@@ -125,6 +135,20 @@
     <footer>
         <p>&copy; 2026 TechnikCafé Wernigerode</p>
     </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('intro-screen');
+                intro.classList.add('fade-out');
+                
+                // Entfernt das Intro komplett aus dem Hintergrund, wenn die Animation vorbei ist
+                setTimeout(() => {
+                    intro.style.display = 'none';
+                }, 600); 
+            }, 2000); // 2000 Millisekunden = 2 Sekunden Anzeigedauer
+        });
+    </script>
 
 </body>
 </html>
