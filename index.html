@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnikCafé | Technik. Reparatur. Beratung.</title>
-    <link rel="stylesheet" href="style.css?v=1.7">
+    <link rel="stylesheet" href="style.css?v=1.8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -181,33 +181,43 @@
         <div class="modal-content glass calc-modal-content">
             <button id="calc-close-btn" class="modal-close" aria-label="Schließen">&times;</button>
             <h3><i class="fas fa-calculator"></i> Kostenrechner</h3>
-            <p class="modal-desc">Finde schnell heraus, mit welchen Kosten du ungefähr rechnen kannst.</p>
+            <p class="modal-desc">Wähle Schritt für Schritt deine Optionen, um eine realistische Preisschätzung zu erhalten.</p>
             
             <div class="input-group">
-                <label for="calc-category">1. Gerät / Service-Typ</label>
-                <select id="calc-category">
-                    <option value="apple">🍏 Smartphone: Apple iPhone</option>
-                    <option value="samsung-s">📱 Smartphone: Samsung Galaxy S-Reihe</option>
-                    <option value="samsung-a">📱 Smartphone: Samsung Galaxy A-Reihe</option>
-                    <option value="pc-laptop">💻 PC & Laptop Hardware</option>
-                    <option value="daten-software">💿 Software, Daten & Netzwerke</option>
+                <label for="calc-main-cat">1. Bereich wählen</label>
+                <select id="calc-main-cat">
+                    <option value="smartphone">📱 Smartphone Reparatur</option>
+                    <option value="computer">💻 PC & Laptop Service</option>
+                    <option value="software-network">💿 Software, Daten & Netzwerke</option>
                 </select>
             </div>
 
+            <div class="input-group" id="group-brand">
+                <label for="calc-brand">2. Marke / System</label>
+                <select id="calc-brand">
+                    </select>
+            </div>
+
+            <div class="input-group" id="group-model">
+                <label for="calc-model-series">3. Modellreihe / Generation</label>
+                <select id="calc-model-series">
+                    </select>
+            </div>
+
             <div class="input-group">
-                <label for="calc-service">2. Gewünschter Service / Defekt</label>
+                <label for="calc-service">4. Defekt / gewünschter Dienst</label>
                 <select id="calc-service">
                     </select>
             </div>
 
             <div class="price-display-box">
-                <span class="price-label">Geschätzter Preis:</span>
+                <span class="price-label">Voraussichtlicher Richtpreis:</span>
                 <div id="calc-price-result" class="calculated-price">0 €</div>
-                <p class="price-disclaimer">*Preise sind Richtwerte inkl. Arbeitszeit. Exakte Angebote folgen nach finaler Fehleranalyse vor Ort. Zzgl. Materialkosten bei Displays/Akkus.</p>
+                <p class="price-disclaimer">*Preise basieren auf typischen Ersatzteilkosten und Arbeitsaufwand. Der exakte Festpreis wird nach einer schnellen Überprüfung vor Ort ermittelt.</p>
             </div>
 
             <a href="#" id="calc-whatsapp-btn" target="_blank" rel="noopener noreferrer" class="button whatsapp-calc-btn">
-                <i class="fab fa-whatsapp"></i> Mit diesem Ergebnis anfragen
+                <i class="fab fa-whatsapp"></i> Kostenschätzung via WhatsApp anfragen
             </a>
         </div>
     </div>
@@ -304,7 +314,7 @@
             }
         });
 
-        // --- MODAL EVENT STEUERUNG (Zwei separate Fenster) ---
+        // --- MODAL EVENT STEUERUNG ---
         const loginOpenBtn = document.getElementById('login-open-btn');
         const loginCloseBtn = document.getElementById('login-close-btn');
         const loginModal = document.getElementById('login-modal');
@@ -316,7 +326,6 @@
         
         const menuToggle = document.getElementById('menu-toggle');
 
-        // Status Modal
         loginOpenBtn.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.classList.add('open');
@@ -324,7 +333,6 @@
         });
         loginCloseBtn.addEventListener('click', () => loginModal.classList.remove('open'));
 
-        // Kostenrechner Modal
         const openCalc = (e) => {
             e.preventDefault();
             calcModal.classList.add('open');
@@ -334,89 +342,197 @@
         heroCalcBtn.addEventListener('click', openCalc);
         calcCloseBtn.addEventListener('click', () => calcModal.classList.remove('open'));
 
-        // Klick außerhalb schließt Modale
         window.addEventListener('click', (e) => {
             if (e.target === loginModal) loginModal.classList.remove('open');
             if (e.target === calcModal) calcModal.classList.remove('open');
         });
 
-        // --- 🧮 ERWEITERTE & REALISTISCHERE KOSTENRECHNER LOGIK ---
-        const servicesData = {
-            apple: [
-                { text: "🔋 iPhone Akkuwechsel (Modelle bis iPhone 11)", price: "59 €" },
-                { text: "🔋 iPhone Akkuwechsel (Neuere Generationen ab iPhone 12)", price: "ab 79 €" },
-                { text: "📱 iPhone Displaybruch / Glasreparatur (Standard)", price: "ab 89 €" },
-                { text: "📱 iPhone Displaybruch / OLED-Originalqualität", price: "ab 139 €" },
-                { text: "🔌 Ladebuchse reinigen / Kontaktspray-Service", price: "29 €" },
-                { text: "⚙️ iOS Systemwiederherstellung & Datenübertrag", price: "49 €" }
-            ],
-            "samsung-s": [
-                { text: "🔋 Galaxy S-Reihe Akkuwechsel (z.B. S20, S21, S22)", price: "69 €" },
-                { text: "📱 Galaxy S-Reihe Displaywechsel (AMOLED Original)", price: "ab 149 €" },
-                { text: "📸 Kamera-Schutzglas Rückseite ersetzen", price: "39 €" },
-                { text: "🔌 USB-C Ladeanschluss Austausch", price: "69 €" }
-            ],
-            "samsung-a": [
-                { text: "🔋 Galaxy A-Reihe Akkuwechsel (z.B. A52, A53, A14)", price: "49 €" },
-                { text: "📱 Galaxy A-Reihe Displaytausch komplett", price: "ab 79 €" },
-                { text: "🔌 Ladeanschluss Probleme beheben", price: "49 €" }
-            ],
-            "pc-laptop": [
-                { text: "🧹 Notebook/PC Innenreinigung & frische Wärmeleitpaste", price: "49 €" },
-                { text: "🚀 500GB / 1TB SSD Upgrade inkl. Windows Klonen", price: "89 €" },
-                { text: "💻 Notebook Displaybruch Reparatur", price: "ab 119 €" },
-                { text: "🔌 PC-Netzteil / Grafikkarte austauschen (zzgl. Teil)", price: "39 €" },
-                { text: "🔍 Komplettdiagnose Hardware-Fehler", price: "29 €" }
-            ],
-            "daten-software": [
-                { text: "💿 Windows 10/11 Neuinstallation inkl. aller Treiber", price: "69 €" },
-                { text: "🛡️ Bereinigung: Viren, Trojaner & Adware entfernen", price: "59 €" },
-                { text: "💾 Datenrettung von defekten/gelöschten Medien", price: "ab 49 €" },
-                { text: "🌐 WLAN-Optimierung & Router vor Ort einrichten", price: "69 €" },
-                { text: "🏠 Smart Home Beratung / Home Assistant Setup", price: "Nach Aufwand" }
-            ]
+        // --- 🧮 DYNAMISCHE & STRUKTURIERTE PREIS-DATENBANK ---
+        const db = {
+            smartphone: {
+                brands: { apple: "Apple iPhone", samsung: "Samsung Galaxy" },
+                series: {
+                    apple: {
+                        iph1617: "iPhone 16 / 17 Serie",
+                        iph1315: "iPhone 13 / 14 / 15 Serie",
+                        iph1112: "iPhone 11 / 12 Serie",
+                        ipholder: "iPhone X / XR / SE (Älter)"
+                    },
+                    samsung: {
+                        galaxyS: "Galaxy S-Reihe (High-End)",
+                        galaxyA: "Galaxy A-Reihe (Mittelklasse)"
+                    }
+                },
+                services: {
+                    iph1617: [
+                        { text: "📱 Displaytausch (Hochwertiges OLED)", price: "ab 149 €" },
+                        { text: "🔋 Akkuwechsel (Premium-Zelle)", price: "99 €" },
+                        { text: "📸 Hauptkamera-Glas hinten tauschen", price: "49 €" },
+                        { text: "🔌 Ladeanschluss Reinigung & Service", price: "29 €" }
+                    ],
+                    iph1315: [
+                        { text: "📱 Displaytausch (OLED Originalqualität)", price: "ab 129 €" },
+                        { text: "🔋 Akkuwechsel (Premium)", price: "89 €" },
+                        { text: "🔌 USB-C / Lightning Ladebuchse Tausch", price: "79 €" }
+                    ],
+                    iph1112: [
+                        { text: "📱 Displaytausch", price: "ab 99 €" },
+                        { text: "🔋 Akkuwechsel", price: "79 €" },
+                        { text: "🔙 Glas-Rückseite erneuern (Laser-Verfahren)", price: "89 €" }
+                    ],
+                    ipholder: [
+                        { text: "📱 Displaywechsel komplett", price: "79 €" },
+                        { text: "🔋 Akkuwechsel", price: "59 €" }
+                    ],
+                    galaxyS: [
+                        { text: "📱 Displaywechsel (Original Service Pack)", price: "ab 169 €" },
+                        { text: "🔋 Akkuwechsel (Original)", price: "79 €" },
+                        { text: "🔌 USB-C Ladebuchse Kompletttausch", price: "69 €" },
+                        { text: "📸 Kamera-Glas Rückseite wechseln", price: "39 €" }
+                    ],
+                    galaxyA: [
+                        { text: "📱 Displaywechsel komplett", price: "ab 89 €" },
+                        { text: "🔋 Akkuwechsel", price: "59 €" },
+                        { text: "🔌 Ladebuchsen-Platine tauschen", price: "49 €" }
+                    ]
+                }
+            },
+            computer: {
+                brands: { pc: "Desktop Windows PC", laptop: "Notebook / Laptop" },
+                series: {
+                    pc: { standard: "Komplettsystem / Eigenbau PC" },
+                    laptop: { standard: "Multimedia & Office Notebook" }
+                },
+                services: {
+                    standard: [
+                        { text: "🧹 Tiefenreinigung & Premium Wärmeleitpaste (mx-4/6)", price: "49 €" },
+                        { text: "🚀 500GB SSD-Upgrade inkl. Windows & Datenumzug", price: "89 €" },
+                        { text: "🚀 1TB SSD-Upgrade inkl. Windows & Datenumzug", price: "119 €" },
+                        { text: "🔌 Netzteil-Austausch bei Defekt (zzgl. Hardware)", price: "39 €" },
+                        { text: "💻 Notebook Displaytausch (15.6 Zoll Standard)", price: "139 €" },
+                        { text: "🔍 Umfassende Hardware-Fehlersuche & Diagnose", price: "29 €" }
+                    ]
+                }
+            },
+            "software-network": {
+                brands: { software: "Betriebssystem & Daten", network: "Netzwerk & Smart Home" },
+                series: {
+                    software: { softall: "Windows & Datenrettung" },
+                    network: { netall: "Router & Hausautomation" }
+                },
+                services: {
+                    softall: [
+                        { text: "💿 Windows 10/11 Neuinstallation sauber mit Treubern", price: "69 €" },
+                        { text: "🛡️ Viren-, Adware- & Schadsoftware-Entfernung", price: "59 €" },
+                        { text: "💾 Logische Datenrettung (gelöschte Bilder/Dokumente)", price: "ab 49 €" },
+                        { text: "🔄 Systemumzug auf neuen PC/Laptop", price: "79 €" }
+                    ],
+                    netall: [
+                        { text: "🌐 WLAN-Einrichtung, Mesh & Router Konfiguration vor Ort", price: "69 €" },
+                        { text: "🏠 Home Assistant Smart-Home Beratung & Basis-Setup", price: "Nach Aufwand" }
+                    ]
+                }
+            }
         };
 
-        const categorySelect = document.getElementById('calc-category');
+        // DOM Elemente abrufen
+        const mainCatSelect = document.getElementById('calc-main-cat');
+        const brandSelect = document.getElementById('calc-brand');
+        const modelSelect = document.getElementById('calc-model-series');
         const serviceSelect = document.getElementById('calc-service');
         const priceResult = document.getElementById('calc-price-result');
         const whatsappCalcBtn = document.getElementById('calc-whatsapp-btn');
 
-        function updateCalculator() {
-            const selectedCategory = categorySelect.value;
-            const services = servicesData[selectedCategory];
+        function rebuildDropdowns() {
+            const mainCat = mainCatSelect.value;
+            const currentData = db[mainCat];
+
+            // 1. Marken befüllen
+            brandSelect.innerHTML = "";
+            for (let key in currentData.brands) {
+                let opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = currentData.brands[key];
+                brandSelect.appendChild(opt);
+            }
             
+            updateModels();
+        }
+
+        function updateModels() {
+            const mainCat = mainCatSelect.value;
+            const brand = brandSelect.value;
+            const currentData = db[mainCat];
+
+            modelSelect.innerHTML = "";
+            const models = currentData.series[brand];
+            for (let key in models) {
+                let opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = models[key];
+                modelSelect.appendChild(opt);
+            }
+
+            updateServices();
+        }
+
+        function updateServices() {
+            const mainCat = mainCatSelect.value;
+            let modelKey = modelSelect.value;
+            
+            // Fallback für PC/Software wo alle denselben Key nutzen
+            if (mainCat !== 'smartphone') {
+                modelKey = "standard";
+                if (mainCat === 'software-network') {
+                    modelKey = brandSelect.value === 'software' ? 'softall' : 'netall';
+                }
+            }
+
+            const services = db[mainCat].services[modelKey] || [];
+
             serviceSelect.innerHTML = "";
             services.forEach((service, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = service.text;
-                serviceSelect.appendChild(option);
+                let opt = document.createElement('option');
+                opt.value = index;
+                opt.textContent = service.text;
+                serviceSelect.appendChild(opt);
             });
 
-            calculatePrice();
+            showFinalPrice();
         }
 
-        function calculatePrice() {
-            const selectedCategory = categorySelect.value;
-            const selectedServiceIndex = serviceSelect.value;
+        function showFinalPrice() {
+            const mainCat = mainCatSelect.value;
+            let modelKey = modelSelect.value;
+            if (mainCat !== 'smartphone') {
+                modelKey = "standard";
+                if (mainCat === 'software-network') {
+                    modelKey = brandSelect.value === 'software' ? 'softall' : 'netall';
+                }
+            }
             
-            if (selectedServiceIndex === "" || !servicesData[selectedCategory]) return;
+            const serviceIndex = serviceSelect.value;
+            const services = db[mainCat].services[modelKey] || [];
+            const selectedService = services[serviceIndex];
 
-            const service = servicesData[selectedCategory][selectedServiceIndex];
-            priceResult.textContent = service.price;
-
-            // WhatsApp-Direktanfrage
-            const phoneNumber = "4915736841062";
-            const message = `Hallo TechnikCafé! Ich habe euren Kostenrechner ausprobiert. Ich benötige Hilfe bei folgendem Service: ${service.text} (${service.price}). Wann hättet ihr Zeit für einen Termin?`;
-            whatsappCalcBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            if (selectedService) {
+                priceResult.textContent = selectedService.price;
+                
+                // Generiere den WhatsApp Text
+                const phone = "4915736841062";
+                const text = `Hallo TechnikCafé, ich habe euren Rechner genutzt. Ich interessiere mich für folgenden Service:\n👉 ${selectedService.text} (${selectedService.price}).\nWann hättet ihr Zeit für eine genauere Absprache oder Diagnose?`;
+                whatsappCalcBtn.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+            }
         }
 
-        categorySelect.addEventListener('change', updateCalculator);
-        serviceSelect.addEventListener('change', calculatePrice);
+        // Event Listener verknüpfen
+        mainCatSelect.addEventListener('change', rebuildDropdowns);
+        brandSelect.addEventListener('change', updateModels);
+        modelSelect.addEventListener('change', updateServices);
+        serviceSelect.addEventListener('change', showFinalPrice);
 
-        // Startkonfiguration
-        updateCalculator();
+        // Initialer Start beim Seitenaufruf
+        rebuildDropdowns();
     </script>
 </body>
 </html>
