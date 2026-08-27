@@ -231,10 +231,10 @@
             <h3><i class="fas fa-tools"></i> Status abrufen</h3>
             <p class="modal-desc">Gib deine Daten ein, um den aktuellen Stand deiner Reparatur live einzusehen.</p>
             
-            <form onsubmit="event.preventDefault(); alert('Die ERPNext-Anbindung folgt in Kürze! Dein Status wird bald hier abrufbar sein.');">
+            <form id="status-check-form" onsubmit="return handleStatusCheck(event);">
                 <div class="input-group">
-                    <label for="auftragsnummer">Auftrags- oder Ticketnummer</label>
-                    <input type="text" id="auftragsnummer" placeholder="z.B. REP-2026-001" required>
+                    <label for="trackingcode">Tracking-Code (aus deiner Bestätigungsmail)</label>
+                    <input type="text" id="trackingcode" placeholder="z.B. zjoaaeryoi4yayp9" required>
                 </div>
                 <div class="input-group">
                     <label for="login-email">E-Mail-Adresse</label>
@@ -316,6 +316,17 @@
                 sunIcon.style.display = 'none';
             }
         });
+
+        // --- REPARATURSTATUS WEITERLEITUNG ---
+        function handleStatusCheck(event) {
+            event.preventDefault();
+            const trackingCode = document.getElementById('trackingcode').value.trim();
+            const email = document.getElementById('login-email').value.trim();
+            const baseUrl = 'https://status.technikcafe.com:8843/public/ticket/view.php';
+            const url = baseUrl + '?entity=1&track_id=' + encodeURIComponent(trackingCode) + '&email=' + encodeURIComponent(email);
+            window.open(url, '_blank');
+            return false;
+        }
 
         // --- MODAL EVENT STEUERUNG ---
         const loginOpenBtn = document.getElementById('login-open-btn');
