@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://technikcafe.com/">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <link rel="stylesheet" href="style.css?v=2.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -202,9 +202,8 @@
             </div>
 
             <div class="input-group" id="group-brand">
-                <label for="calc-brand">2. Marke / System</label>
-                <select id="calc-brand">
-                    </select>
+                <label>2. Marke / System</label>
+                <div id="calc-brand" class="option-pills"></div>
             </div>
 
             <div class="input-group" id="group-model">
@@ -486,36 +485,47 @@
         const disabledBrands = { smartphone: ["apple", "samsung"] };
 
         const mainCatSelect = document.getElementById('calc-main-cat');
-        const brandSelect = document.getElementById('calc-brand');
+        const brandContainer = document.getElementById('calc-brand');
         const modelSelect = document.getElementById('calc-model-series');
         const serviceSelect = document.getElementById('calc-service');
         const priceResult = document.getElementById('calc-price-result');
         const whatsappCalcBtn = document.getElementById('calc-whatsapp-btn');
+        let selectedBrand = null;
 
         function rebuildDropdowns() {
             const mainCat = mainCatSelect.value;
             const currentData = db[mainCat];
             const disabledList = disabledBrands[mainCat] || [];
 
-            brandSelect.innerHTML = "";
-            let firstEnabledBrand = null;
+            brandContainer.innerHTML = "";
+            selectedBrand = null;
             for (let key in currentData.brands) {
-                let opt = document.createElement('option');
-                opt.value = key;
                 const isDisabled = disabledList.includes(key);
-                opt.textContent = isDisabled ? `${currentData.brands[key]} — pausiert` : currentData.brands[key];
-                if (isDisabled) opt.disabled = true;
-                else if (firstEnabledBrand === null) firstEnabledBrand = key;
-                brandSelect.appendChild(opt);
+                let pill = document.createElement('div');
+                pill.className = "option-pill" + (isDisabled ? " disabled" : "");
+                pill.dataset.key = key;
+                pill.textContent = isDisabled ? `${currentData.brands[key]} — pausiert` : currentData.brands[key];
+                if (!isDisabled && selectedBrand === null) selectedBrand = key;
+                if (!isDisabled) {
+                    pill.addEventListener('click', () => {
+                        selectedBrand = key;
+                        brandContainer.querySelectorAll('.option-pill').forEach(p => p.classList.remove('active'));
+                        pill.classList.add('active');
+                        updateModels();
+                    });
+                }
+                brandContainer.appendChild(pill);
             }
-            if (firstEnabledBrand !== null) brandSelect.value = firstEnabledBrand;
+            if (selectedBrand !== null) {
+                brandContainer.querySelector(`[data-key="${selectedBrand}"]`).classList.add('active');
+            }
 
             updateModels();
         }
 
         function updateModels() {
             const mainCat = mainCatSelect.value;
-            const brand = brandSelect.value;
+            const brand = selectedBrand;
             const currentData = db[mainCat];
 
             modelSelect.innerHTML = "";
@@ -537,7 +547,7 @@
             if (mainCat !== 'smartphone') {
                 modelKey = "standard";
                 if (mainCat === 'software-network') {
-                    modelKey = brandSelect.value === 'software' ? 'softall' : 'netall';
+                    modelKey = selectedBrand === 'software' ? 'softall' : 'netall';
                 }
             }
 
@@ -564,7 +574,7 @@
             if (mainCat !== 'smartphone') {
                 modelKey = "standard";
                 if (mainCat === 'software-network') {
-                    modelKey = brandSelect.value === 'software' ? 'softall' : 'netall';
+                    modelKey = selectedBrand === 'software' ? 'softall' : 'netall';
                 }
             }
             
@@ -582,7 +592,6 @@
         }
 
         mainCatSelect.addEventListener('change', rebuildDropdowns);
-        brandSelect.addEventListener('change', updateModels);
         modelSelect.addEventListener('change', updateServices);
         serviceSelect.addEventListener('change', showFinalPrice);
 
