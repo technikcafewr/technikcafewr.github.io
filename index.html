@@ -483,6 +483,8 @@
             }
         };
 
+        const disabledBrands = { smartphone: ["apple", "samsung"] };
+
         const mainCatSelect = document.getElementById('calc-main-cat');
         const brandSelect = document.getElementById('calc-brand');
         const modelSelect = document.getElementById('calc-model-series');
@@ -493,15 +495,21 @@
         function rebuildDropdowns() {
             const mainCat = mainCatSelect.value;
             const currentData = db[mainCat];
+            const disabledList = disabledBrands[mainCat] || [];
 
             brandSelect.innerHTML = "";
+            let firstEnabledBrand = null;
             for (let key in currentData.brands) {
                 let opt = document.createElement('option');
                 opt.value = key;
-                opt.textContent = currentData.brands[key];
+                const isDisabled = disabledList.includes(key);
+                opt.textContent = isDisabled ? `${currentData.brands[key]} — pausiert` : currentData.brands[key];
+                if (isDisabled) opt.disabled = true;
+                else if (firstEnabledBrand === null) firstEnabledBrand = key;
                 brandSelect.appendChild(opt);
             }
-            
+            if (firstEnabledBrand !== null) brandSelect.value = firstEnabledBrand;
+
             updateModels();
         }
 
