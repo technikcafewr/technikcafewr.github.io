@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://technikcafe.com/">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="style.css?v=1.9">
+    <link rel="stylesheet" href="style.css?v=2.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -76,7 +76,7 @@
             <div class="cards">
                 <div class="card glass">
                     <h3>📱 Smartphones</h3>
-                    <p>Display, Akku, Software und Einrichtung.</p>
+                    <p>Reparatur, Software, Ersteinrichtung und mehr.</p>
                 </div>
                 <div class="card glass">
                     <h3>💻 PC & Laptop</h3>
@@ -88,7 +88,11 @@
                 </div>
                 <div class="card glass">
                     <h3>💾 Daten</h3>
-                    <p>Datenrettung und Datensicherung.</p>
+                    <p>Datenrettung, Datenübernahme und Datensicherung.</p>
+                </div>
+                <div class="card glass">
+                    <h3>🛠️ Service & Einrichtung</h3>
+                    <p>Diagnose, Vor-Ort-Service, Fernwartung, WLAN/Drucker/Smartphone-Einrichtung.</p>
                 </div>
             </div>
         </section>
@@ -185,13 +189,15 @@
             <button id="calc-close-btn" class="modal-close" aria-label="Schließen">&times;</button>
             <h3><i class="fas fa-calculator"></i> Kostenrechner</h3>
             <p class="modal-desc">Wähle Schritt für Schritt deine Optionen, um eine realistische Preisschätzung zu erhalten.</p>
+            <p class="calc-note">ℹ️ Ausgegraute Leistungen sind aktuell pausiert – bei Bedarf einfach direkt bei uns anfragen.</p>
             
             <div class="input-group">
                 <label for="calc-main-cat">1. Bereich wählen</label>
                 <select id="calc-main-cat">
                     <option value="smartphone">📱 Smartphone Reparatur</option>
                     <option value="computer">💻 PC & Laptop Service</option>
-                    <option value="software-network">💿 Software, Daten & Netzwerke</option>
+                    <option value="software-network">💿 Software & Daten</option>
+                    <option value="service">🛠️ Service & Einrichtung</option>
                 </select>
             </div>
 
@@ -364,7 +370,7 @@
         // --- 🧮 MARKTÜBLICHE & HOCHKALKULIERTE PREIS-DATENBANK ---
         const db = {
             smartphone: {
-                brands: { apple: "Apple iPhone", samsung: "Samsung Galaxy" },
+                brands: { apple: "Apple iPhone", samsung: "Samsung Galaxy", android: "Android (allgemein - alle Hersteller)" },
                 series: {
                     apple: {
                         iph1617: "iPhone 16 / 17 Serie",
@@ -375,39 +381,48 @@
                     samsung: {
                         galaxyS: "Galaxy S-Reihe (High-End)",
                         galaxyA: "Galaxy A-Reihe (Mittelklasse)"
+                    },
+                    android: {
+                        androidall: "Alle Android-Geräte (Samsung, Xiaomi, Huawei, etc.)"
                     }
                 },
                 services: {
                     iph1617: [
-                        { text: "📱 Displaytausch (Hochwertiges OLED)", price: "ab 149 €" },
-                        { text: "🔋 Akkuwechsel (Premium-Zelle)", price: "99 €" },
+                        { text: "📱 Displaytausch (Hochwertiges OLED)", price: "ab 149 €", disabled: true },
+                        { text: "🔋 Akkuwechsel (Premium-Zelle)", price: "99 €", disabled: true },
                         { text: "📸 Hauptkamera-Glas hinten tauschen", price: "49 €" },
                         { text: "🔌 Ladeanschluss Reinigung & Service", price: "29 €" }
                     ],
                     iph1315: [
-                        { text: "📱 Displaytausch (OLED Originalqualität)", price: "ab 129 €" },
-                        { text: "🔋 Akkuwechsel (Premium)", price: "89 €" },
+                        { text: "📱 Displaytausch (OLED Originalqualität)", price: "ab 129 €", disabled: true },
+                        { text: "🔋 Akkuwechsel (Premium)", price: "89 €", disabled: true },
                         { text: "🔌 USB-C / Lightning Ladebuchse Tausch", price: "79 €" }
                     ],
                     iph1112: [
-                        { text: "📱 Displaytausch", price: "ab 99 €" },
-                        { text: "🔋 Akkuwechsel", price: "79 €" },
+                        { text: "📱 Displaytausch", price: "ab 99 €", disabled: true },
+                        { text: "🔋 Akkuwechsel", price: "79 €", disabled: true },
                         { text: "🔙 Glas-Rückseite erneuern (Laser-Verfahren)", price: "89 €" }
                     ],
                     ipholder: [
-                        { text: "📱 Displaywechsel komplett", price: "79 €" },
-                        { text: "🔋 Akkuwechsel", price: "59 €" }
+                        { text: "📱 Displaywechsel komplett", price: "79 €", disabled: true },
+                        { text: "🔋 Akkuwechsel", price: "59 €", disabled: true }
                     ],
                     galaxyS: [
-                        { text: "📱 Displaywechsel (Original Service Pack)", price: "ab 169 €" },
-                        { text: "🔋 Akkuwechsel (Original)", price: "79 €" },
+                        { text: "📱 Displaywechsel (Original Service Pack)", price: "ab 169 €", disabled: true },
+                        { text: "🔋 Akkuwechsel (Original)", price: "79 €", disabled: true },
                         { text: "🔌 USB-C Ladebuchse Kompletttausch", price: "69 €" },
                         { text: "📸 Kamera-Glas Rückseite wechseln", price: "39 €" }
                     ],
                     galaxyA: [
-                        { text: "📱 Displaywechsel komplett", price: "ab 89 €" },
-                        { text: "🔋 Akkuwechsel", price: "59 €" },
+                        { text: "📱 Displaywechsel komplett", price: "ab 89 €", disabled: true },
+                        { text: "🔋 Akkuwechsel", price: "59 €", disabled: true },
                         { text: "🔌 Ladeanschluss-Platine tauschen", price: "49 €" }
+                    ],
+                    androidall: [
+                        { text: "📲 Android-Ersteinrichtung (Google-Konto, Sicherheit, wichtige Apps)", price: "34,99 €" },
+                        { text: "📥 Apps installieren & einrichten (bis 10 Apps)", price: "19,99 €" },
+                        { text: "🦠 Android-Virenentfernung (schädliche Apps / QR-Code-Viren)", price: "49,99 €" },
+                        { text: "🔄 Datensicherung vor Werksreset", price: "29,99 €" }
                     ]
                 }
             },
@@ -419,30 +434,49 @@
                 },
                 services: {
                     standard: [
-                        { text: "🧹 Tiefenreinigung & Premium Wärmeleitpaste (MX-6)", price: "59 €" },
+                        { text: "💾 SSD-Einbau (ohne Umzug)", price: "29,99 €" },
+                        { text: "🧠 RAM-Einbau", price: "19,99 €" },
                         { text: "🚀 500GB SSD-Upgrade inkl. Windows & Datenumzug", price: "99 €" },
                         { text: "🚀 1TB SSD-Upgrade inkl. Windows & Datenumzug", price: "139 €" },
+                        { text: "🧹 Notebook-Innenreinigung", price: "48,99 €" },
+                        { text: "🧴 Reinigung + Wärmeleitpaste", price: "59,99 €" },
                         { text: "🔌 Netzteil-Austausch bei Defekt (zzgl. Hardware)", price: "49 €" },
-                        { text: "💻 Notebook Displaytausch (15.6 Zoll IPS Standard)", price: "ab 149 €" },
-                        { text: "🔍 Umfassende Hardware-Fehlersuche & Diagnose", price: "39 €" }
+                        { text: "💻 Notebook Displaytausch (15.6 Zoll IPS Standard)", price: "ab 149 €" }
                     ]
                 }
             },
             "software-network": {
-                brands: { software: "Betriebssystem & Daten", network: "Netzwerk & Smart Home" },
+                brands: { software: "Betriebssystem & Daten" },
                 series: {
-                    software: { softall: "Windows & Datenrettung" },
-                    network: { netall: "Router & Hausautomation" }
+                    software: { softall: "Windows, Daten & Sicherheit" }
                 },
                 services: {
                     softall: [
-                        { text: "💿 Windows 10/11 Neuinstallation sauber mit Treibern", price: "79 €" },
-                        { text: "🛡️ Bereinigung: Viren, Trojaner & Adware entfernen", price: "69 €" },
-                        { text: "💾 Logische Datenrettung (wichtige Bilder & Dokumente)", price: "ab 79 €" },
-                        { text: "🔄 Systemumzug auf neuen PC/Laptop komplett", price: "89 €" }
-                    ],
-                    netall: [
-                        { text: "🌐 WLAN-Einrichtung, Mesh & Router Konfiguration vor Ort", price: "79 €" },
+                        { text: "💿 Windows 11 Neuinstallation", price: "60 €" },
+                        { text: "🔧 Treiber- und Update-Service", price: "29,99 €" },
+                        { text: "🛡️ Virenentfernung", price: "69,99 €" },
+                        { text: "⚡ PC-Optimierung", price: "39,99 €" },
+                        { text: "📦 Datenübernahme bis 250 GB", price: "39,99 €" },
+                        { text: "📦 Datenübernahme bis 1 TB", price: "69,99 €" },
+                        { text: "💾 Logische Datenrettung (wichtige Bilder & Dokumente)", price: "ab 79 €" }
+                    ]
+                }
+            },
+            service: {
+                brands: { allgemein: "Allgemeiner Service" },
+                series: {
+                    allgemein: { allgemein: "Diagnose, Vor-Ort & Einrichtung" }
+                },
+                services: {
+                    allgemein: [
+                        { text: "🔍 Fehlerdiagnose (1 Std., netto)", price: "29 €" },
+                        { text: "📋 Kostenvoranschlag (bei Auftrag kostenlos)", price: "20 €" },
+                        { text: "🚗 Vor-Ort-Service (erste Stunde)", price: "79,99 €" },
+                        { text: "💻 Fernwartung (je 30 Min.)", price: "29,99 €" },
+                        { text: "🌐 WLAN-/Router-Einrichtung", price: "39,99 €" },
+                        { text: "🖨️ Drucker einrichten", price: "29,99 €" },
+                        { text: "📲 Smartphone-Ersteinrichtung", price: "29,99 €" },
+                        { text: "🛡️ Displayfolie montieren", price: "9,99 €" },
                         { text: "🏠 Home Assistant Smart-Home Beratung & Basis-Setup", price: "Nach Aufwand" }
                     ]
                 }
@@ -502,12 +536,16 @@
             const services = db[mainCat].services[modelKey] || [];
 
             serviceSelect.innerHTML = "";
+            let firstEnabledIndex = null;
             services.forEach((service, index) => {
                 let opt = document.createElement('option');
                 opt.value = index;
-                opt.textContent = service.text;
+                opt.textContent = service.disabled ? `${service.text} — pausiert` : service.text;
+                if (service.disabled) opt.disabled = true;
+                else if (firstEnabledIndex === null) firstEnabledIndex = index;
                 serviceSelect.appendChild(opt);
             });
+            if (firstEnabledIndex !== null) serviceSelect.value = firstEnabledIndex;
 
             showFinalPrice();
         }
@@ -526,7 +564,7 @@
             const services = db[mainCat].services[modelKey] || [];
             const selectedService = services[serviceIndex];
 
-            if (selectedService) {
+            if (selectedService && !selectedService.disabled) {
                 priceResult.textContent = selectedService.price;
                 
                 const phone = "4915736841062";
