@@ -45,6 +45,7 @@
                 <span></span>
                 <span></span>
             </label>
+            <label for="menu-toggle" class="nav-backdrop"></label>
 
             <ul>
                 <li><a href="#start">Start</a></li>
@@ -519,19 +520,18 @@
             selectedBrand = null;
             for (let key in currentData.brands) {
                 const isDisabled = disabledList.includes(key);
+                if (isDisabled) continue; // Komplett ausblenden statt nur ausgrauen
                 let pill = document.createElement('div');
-                pill.className = "option-pill" + (isDisabled ? " disabled" : "");
+                pill.className = "option-pill";
                 pill.dataset.key = key;
-                pill.textContent = isDisabled ? `${currentData.brands[key]} — pausiert` : currentData.brands[key];
-                if (!isDisabled && selectedBrand === null) selectedBrand = key;
-                if (!isDisabled) {
-                    pill.addEventListener('click', () => {
-                        selectedBrand = key;
-                        brandContainer.querySelectorAll('.option-pill').forEach(p => p.classList.remove('active'));
-                        pill.classList.add('active');
-                        updateModels();
-                    });
-                }
+                pill.textContent = currentData.brands[key];
+                if (selectedBrand === null) selectedBrand = key;
+                pill.addEventListener('click', () => {
+                    selectedBrand = key;
+                    brandContainer.querySelectorAll('.option-pill').forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    updateModels();
+                });
                 brandContainer.appendChild(pill);
             }
             if (selectedBrand !== null) {
@@ -560,14 +560,7 @@
 
         function updateServices() {
             const mainCat = mainCatSelect.value;
-            let modelKey = modelSelect.value;
-            
-            if (mainCat !== 'smartphone') {
-                modelKey = "standard";
-                if (mainCat === 'software-network') {
-                    modelKey = selectedBrand === 'software' ? 'softall' : 'netall';
-                }
-            }
+            const modelKey = modelSelect.value;
 
             const services = db[mainCat].services[modelKey] || [];
 
@@ -588,14 +581,8 @@
 
         function showFinalPrice() {
             const mainCat = mainCatSelect.value;
-            let modelKey = modelSelect.value;
-            if (mainCat !== 'smartphone') {
-                modelKey = "standard";
-                if (mainCat === 'software-network') {
-                    modelKey = selectedBrand === 'software' ? 'softall' : 'netall';
-                }
-            }
-            
+            const modelKey = modelSelect.value;
+
             const serviceIndex = serviceSelect.value;
             const services = db[mainCat].services[modelKey] || [];
             const selectedService = services[serviceIndex];

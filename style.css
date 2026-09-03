@@ -97,7 +97,7 @@ nav a:hover { color: var(--accent); }
 body.light-mode .nav-login-btn:hover { color: #fff !important; }
 
 .theme-btn { background: transparent; border: none; color: var(--text-main); font-size: 1.2rem; cursor: pointer; display: flex; }
-.menu-toggle, .menu-hamburger { display: none; }
+.menu-toggle, .menu-hamburger, .nav-backdrop { display: none; }
 
 /* 🚀 HERO SECTION */
 .hero { text-align: center; padding: 120px 20px 80px 20px; max-width: 900px; margin: 0 auto; }
@@ -171,6 +171,9 @@ h2 { font-size: 2.4rem; margin-bottom: 45px; text-align: center; }
 .modal-content {
     width: 100%;
     max-width: 420px;
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 30px 25px;
     position: relative;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -302,7 +305,25 @@ body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
     
     .menu-hamburger { display: flex; flex-direction: column; gap: 5px; }
     .menu-hamburger span { display: block; width: 26px; height: 3px; background: var(--text-main); }
-    
+
+    .nav-backdrop {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 90;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .menu-toggle:checked ~ .nav-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
     nav ul {
         position: fixed;
         top: 0;
@@ -315,6 +336,7 @@ body.light-mode footer { background: rgba(226, 232, 240, 0.9); }
         align-items: center;
         gap: 35px;
         transition: right 0.4s ease-in-out;
+        z-index: 95;
     }
     .menu-toggle:checked ~ ul { right: 0; }
     .nav-login-btn { width: 80%; text-align: center; padding: 12px 0; }
